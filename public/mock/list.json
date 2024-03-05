@@ -1,0 +1,58 @@
+{
+  "code": 1,
+  "data": {
+    "total": 1,
+    "list": [
+      {
+        "updateDate": "2024-01-25 16:26:56",
+        "editUserId": 1,
+         "listData": "",
+        "roleId": 1,
+        "remark": "",
+        "source": 0,
+        "type": 4,
+        "creatDate": "2030-12-12 12:12:12",
+        "creatUserId": 1,
+        "name": "可视化数据大屏示例1",
+        "dict": "",
+        "id": 39,
+        "category": 1,
+        "status": 1
+      },
+      {
+        "updateDate": "2024-01-25 16:26:56",
+        "editUserId": 1,
+        "listData": "",
+        "roleId": 1,
+        "remark": "",
+        "source": 0,
+        "type": 4,
+        "creatDate": "2030-12-12 12:12:12",
+        "creatUserId": 1,
+        "name": "可视化数据大屏示例2",
+        "dict": "",
+        "id": 40,
+        "category": 1,
+        "status": 1
+      },
+      {
+        "updateDate": "2024-01-25 16:26:56",
+        "editUserId": 1,
+        "listData": "",
+        "roleId": 1,
+        "remark": "",
+        "source": 0,
+        "type": 4,
+        "creatDate": "2030-12-12 12:12:12",
+        "creatUserId": 1,
+        "name": "地图示例",
+        "dict": "",
+        "id": 41,
+        "category": 1,
+        "status": 1
+      }
+    ]
+  },
+  "message": "操作成功",
+  "timestamp": 1707057411318
+}
