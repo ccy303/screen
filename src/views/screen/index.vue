@@ -501,6 +501,11 @@
             apiKey = "designEdit";
         }
 
+        params.data.list = params.data.list.map((item: any) => {
+            item.pluginName = item.config.pluginName || null;
+            return item;
+        });
+
         console.log(params);
 
         return;
