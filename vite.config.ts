@@ -16,7 +16,7 @@ export default defineConfig({
     "process.env.NODE_ENV": JSON.stringify("production"),
   },
   build: {
-    outDir: "echartsvue",
+    outDir: "echartsvueShow",
     cssCodeSplit: false,
     rollupOptions: {
       output: {
@@ -28,7 +28,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "./src/buildMain.ts"),
       formats: ["iife"],
-      name: "echartsvue",
+      name: "echartsvueShow",
     },
   },
   server: {

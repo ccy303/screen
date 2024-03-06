@@ -44,22 +44,18 @@ console.info("loadFile:js");
   const setHtml = (model, props) => {
     console.info("setHtml");
     KDApi.loadFile("./assets/style.css", model, () => {
-      console.info("loadFile:css");
-      console.info("model", model);
       const pinia = createPinia();
       const app = createApp(App);
       app.component("echartsMap", Map);
-      console.info("app", app);
       app.provide("KDModel", model);
       app.use(pinia);
       app.use(router);
       app.use(ElementPlus, { locale: zhCn });
       setTimeout(() => {
-        // app.mount('#root');
         app.mount(model.dom);
       });
     });
   };
 
-  KDApi.register("echartsvue", MyComponent);
+  KDApi.register("echartsvueShow", MyComponent);
 })(window.KDApi);

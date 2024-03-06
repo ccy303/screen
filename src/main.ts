@@ -9,8 +9,6 @@ import "element-plus/dist/index.css";
 import "./assets/scss/element-var.scss";
 import "@/assets/scss/index.scss";
 //状态管理
-import { createPinia } from "pinia";
-
 import Map from "./views/components/map.vue";
 
 import "./js/ace/ace.js";
@@ -19,10 +17,8 @@ import "./js/echarts.min.js";
 
 // 实例化 Pinia
 const app = createApp(App);
-const pinia = createPinia();
 app.component("echartsMap", Map);
 app
-  .use(pinia)
   .use(router)
   .use(ElementPlus, { locale: zhCn })
   .mount(document.querySelector("#app"));
