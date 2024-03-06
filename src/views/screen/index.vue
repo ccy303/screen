@@ -479,6 +479,10 @@ const saveData = () => {
         type: 4 // 1表单,2列表,3流程,4大屏
     };
 
+    if (!params.data.config.name) {
+        return ElMessage.error('请前往大屏配置输入大屏名称')
+    }
+
     let apiKey = "designSave";
     const queryId = route.query.id;
     if (queryId) {
@@ -493,12 +497,7 @@ const saveData = () => {
         return item;
     });
 
-
     console.log('chartData', params);
-
-    console.log('chartData', JSON.stringify({
-        ...params,
-    }));
 
     KDModel.invoke('save', JSON.stringify({
         ...params,
@@ -524,6 +523,7 @@ const saveData = () => {
             loading.value = false;
         });
 };
+
 const getData = () => {
     loading.value = true;
     getInitData(route.query.id)
