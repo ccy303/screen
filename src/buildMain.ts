@@ -20,46 +20,44 @@ import "./js/echarts.min.js";
 console.info("loadFile:js");
 
 (function (KDApi) {
-  function MyComponent(model) {
-    this._setModel(model);
-  }
+    function MyComponent(model) {
+        this._setModel(model);
+    }
 
-  MyComponent.prototype = {
-    _setModel: function (model) {
-      this.model = model;
-    },
-    init: function (props) {
-      console.log("-----init", this.model.style, props);
-      setHtml(this.model, props);
-    },
-    update: function (props) {
-      console.log("-----update", this.model, props);
-      // updateHtml(this.model, props)
-    },
-    destoryed: function () {
-      console.log("-----destoryed", this.model);
-    },
-  };
+    MyComponent.prototype = {
+        _setModel: function (model) {
+            this.model = model;
+        },
+        init: function (props) {
+            console.log("-----init", this.model.style, props);
+            setHtml(this.model, props);
+        },
+        update: function (props) {
+            console.log("-----update", this.model, props);
+            setHtml(this.model, props);
+        },
+        destoryed: function () {
+            console.log("-----destoryed", this.model);
+        }
+    };
 
-  const setHtml = (model, props) => {
-    console.info("setHtml");
-    KDApi.loadFile("./assets/style.css", model, () => {
-      console.info("loadFile:css");
-      console.info("model", model);
-      const pinia = createPinia();
-      const app = createApp(App);
-      app.component("echartsMap", Map);
-      console.info("app", app);
-      app.provide("KDModel", model);
-      app.use(pinia);
-      app.use(router);
-      app.use(ElementPlus, { locale: zhCn });
-      setTimeout(() => {
-        // app.mount('#root');
-        app.mount(model.dom);
-      });
-    });
-  };
+    const setHtml = (model, props) => {
+        console.info("setHtml");
+        KDApi.loadFile("./assets/style.css", model, () => {
+            const pinia = createPinia();
+            const app = createApp(App);
+            app.component("echartsMap", Map);
+            app.provide("KDModel", model);
+            app.provide("KDProps", props);
+            app.use(pinia);
+            app.use(router);
+            app.use(ElementPlus, { locale: zhCn });
+            setTimeout(() => {
+                // app.mount('#root');
+                app.mount(model.dom);
+            });
+        });
+    };
 
-  KDApi.register("echartsvue", MyComponent);
+    KDApi.register("echartsvue", MyComponent);
 })(window.KDApi);

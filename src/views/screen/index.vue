@@ -1,5 +1,3 @@
-<!-- Created by weiXin:337547038 -->
-
 <template>
     <div v-loading="loading" class="container-screen">
         <i v-if="preview" class="icon-close close-preview" @click="preview = false"></i>
@@ -32,7 +30,6 @@ import ConfigControl from "./components/configControl.vue";
 import ControlLeft from "./components/controlLeft.vue";
 import ScreenDesign from "./components/design.vue";
 import type { Contextmenu2, OpenDrawer, ScreenData, UpdatePosition } from "./types";
-import { getRequest } from "@/api";
 import { ElMessage } from "element-plus";
 import { getInitData } from "./getData";
 import { removeUnit } from "./utils";
@@ -77,6 +74,7 @@ const screenData = ref({
 const setLayerList = () => {
     controlLeftEl.value.setLayer(screenData.value.list);
 };
+
 // 顶部工具栏点击事件
 const headToolsClick = (type: string) => {
     designStore.setScreenControlAttr({}); // 清空右则属性相关
@@ -107,7 +105,7 @@ const headToolsClick = (type: string) => {
     }
 };
 // 顶部事件弹窗相关
-const drawer = reactive({
+const drawer: any = reactive({
     visible: false,
     title: "",
     direction: "ltr",
@@ -115,9 +113,11 @@ const drawer = reactive({
     codeType: "",
     callback: ""
 });
+
 const drawerBeforeClose = () => {
     dialogCancel();
 };
+
 const dialogConfirm = (editVal: string) => {
     try {
         let newObj;
@@ -150,6 +150,7 @@ const dialogConfirm = (editVal: string) => {
         ElMessage.error(res.message || "未知原因");
     }
 };
+
 const openDrawer = (params: OpenDrawer) => {
     const { type = "", direction, codeType, title, callback, content, tips } = params;
     drawer.direction = direction || "ltr"; // 窗口位置ltr/rtl
@@ -173,6 +174,7 @@ const openDrawer = (params: OpenDrawer) => {
     }
     drawer.content = editData;
 };
+
 const dialogCancel = () => {
     drawer.visible = false;
     drawer.type = "";
@@ -293,6 +295,7 @@ const rightMenuEl = ref();
 const screenContextmenu = (data: Contextmenu2) => {
     rightMenuEl.value.open(data);
 };
+
 const rightMenuClick = (key: string, data: any) => {
     const list = screenData.value.list;
     const currentData = list[data.activeIndex];
@@ -470,6 +473,7 @@ const rightMenuClick = (key: string, data: any) => {
             break;
     }
 };
+
 //****************数据相关****************//
 const saveData = () => {
     const params: any = {
@@ -504,30 +508,32 @@ const saveData = () => {
     }))
 
     return;
-    loading.value = true;
-    getRequest(apiKey, params)
-        .then((res: any) => {
-            ElMessage({
-                message: res.message || "保存成功！",
-                type: "success"
-            });
-            // 这里可根据不同情况跳转到对应地址
-            // 修改时不跳转，以免在开发阶段频繁修改跳转
-            if (!queryId) {
-                router.push({ path: "/design/screen/list" });
-            }
-            loading.value = false;
-        })
-        .catch((res: any) => {
-            ElMessage.error(res.message || "保存异常");
-            loading.value = false;
-        });
+    // loading.value = true;
+    // getRequest(apiKey, params)
+    //     .then((res: any) => {
+    //         ElMessage({
+    //             message: res.message || "保存成功！",
+    //             type: "success"
+    //         });
+    //         // 这里可根据不同情况跳转到对应地址
+    //         // 修改时不跳转，以免在开发阶段频繁修改跳转
+    //         if (!queryId) {
+    //             router.push({ path: "/design/screen/list" });
+    //         }
+    //         loading.value = false;
+    //     })
+    //     .catch((res: any) => {
+    //         ElMessage.error(res.message || "保存异常");
+    //         loading.value = false;
+    //     });
 };
 
 const getData = () => {
     loading.value = true;
     getInitData(route.query.id)
         .then((res: any) => {
+            console.log(res);
+            
             loading.value = false;
             screenData.value = res.screenData;
             setLayerList();
@@ -540,9 +546,11 @@ const getData = () => {
             loading.value = false;
         });
 };
+
 //****************数据相关****************//
 onMounted(() => {
     getData();
 });
 onBeforeUnmount(() => { });
+
 </script>

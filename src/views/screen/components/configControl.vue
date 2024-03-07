@@ -73,29 +73,12 @@
                         <el-form-item label="插件标识">
                             <el-input v-model="current.config.pluginName" placeholder="插件标识" />
                         </el-form-item>
-                        <!-- <el-form-item>
-                            <el-input v-model="current.config.requestUrl" placeholder="接口URL或api中的key">
-                                <template #prepend>
-                                    <el-select v-model="current.config.method" style="width: 60px">
-                                        <el-option label="get" value="get" />
-                                        <el-option label="post" value="post" />
-                                        <el-option label="ws" value="ws" disabled />
-                                    </el-select>
-                                </template>
-</el-input>
-</el-form-item>
-<el-form-item label="刷新时间">
-    <el-input-number v-model="current.config.loopTime" disabled />
-</el-form-item>
-<el-form-item>
-    <h3>接口数据处理事件</h3>
-</el-form-item>
-<el-form-item>
-    <el-button @click="openDrawer('beforeFetch')">beforeFetch</el-button>
-</el-form-item>
-<el-form-item>
-    <el-button @click="openDrawer('afterFetchScreen')">afterFetch</el-button>
-</el-form-item> -->
+                    </template>
+
+                    <template v-if="current.id">
+                        <el-form-item>
+                            <el-button type="primary" @click="saveChartoption">保存配置</el-button>
+                        </el-form-item>
                     </template>
                 </el-form>
             </el-tab-pane>
@@ -161,36 +144,16 @@
                     <el-form-item>
                         <el-button @click="openDrawer('editCss')">编辑样式</el-button>
                     </el-form-item>
-                    <!-- <el-form-item>
-                        <h3>全局数据</h3>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-input :model-value="config.requestUrl" placeholder="接口URL或api中的key"
-                            @input="configChange('requestUrl', $event)">
-
-                            <template #prepend>
-                                <el-select :model-value="config.method" style="width: 60px"
-                                    @change="configChange('method', $event)">
-                                    <el-option label="get" value="get" />
-                                    <el-option label="post" value="post" />
-                                    <el-option label="ws" value="ws" disabled />
-                                </el-select>
-                            </template>
-                        </el-input>
-                    </el-form-item> -->
                     <el-form-item label="刷新时间">
                         <el-input-number disabled :model-value="config.loopTime"
                             @input="configChange('loopTime', $event)" />
                     </el-form-item>
-                    <!-- <el-form-item>
-                        <h3>接口数据处理事件</h3>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button @click="openDrawer('beforeFetch', true)">beforeFetch</el-button>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button @click="openDrawer('afterFetch', true)">afterFetch</el-button>
-                    </el-form-item> -->
+
+                    <template v-if="config.id">
+                        <el-form-item>
+                            <el-button type="primary" @click="saveScreenOption">保存配置</el-button>
+                        </el-form-item>
+                    </template>
                 </el-form>
             </el-tab-pane>
         </el-tabs>
@@ -199,11 +162,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed, watch } from "vue";
+import { reactive, ref, computed, watch, inject } from "vue";
 import { onBeforeRouteLeave } from "vue-router";
 import type { Config, OpenDrawer } from "../types";
 import UploadImage from "./upload.vue";
 import { useDesignStore } from "@/store/design";
+
+const KDModel = inject('KDModel')
 
 const props: any = withDefaults(
     defineProps<{
@@ -211,6 +176,7 @@ const props: any = withDefaults(
     }>(),
     {}
 );
+
 const emits: any = defineEmits<{
     (e: "update:config", val: Config): void;
     (e: "openDrawer", val: OpenDrawer): void;
@@ -218,20 +184,26 @@ const emits: any = defineEmits<{
 }>();
 
 const designStore = useDesignStore();
+
 const current: any = computed(() => {
     return designStore.screenControlAttr;
 });
+
 const isLockDisplay = computed(() => {
     return current.value?.config?.lock || current.value?.position?.display;
 });
+
 const uploadImageEl = ref();
+
 const type = computed(() => {
     return current.value.type;
 });
+
 // ---------------------大屏配置开始---------------------
 const updateConfig = (val: any) => {
     emits("update:config", Object.assign({}, props.config, val));
 };
+
 const state = reactive({
     bgColor: "",
     bgLinear: "",
@@ -272,6 +244,7 @@ const unWatch = watch(
     },
     { immediate: true }
 );
+
 const stateChange = () => {
     let bg = "";
     switch (state.bgSelect) {
@@ -287,9 +260,11 @@ const stateChange = () => {
     }
     configChange("background", bg);
 };
+
 const configChange = (key: string, val: any) => {
     updateConfig({ [key]: val });
 };
+
 // ---------------------大屏配置结束---------------------
 const positionProperty: any = computed(() => {
     if (Object.keys(current.value).length) {
@@ -537,6 +512,7 @@ const positionProperty: any = computed(() => {
     }
     return [];
 });
+
 const propertyChange = (obj: any, value: any) => {
     if (obj.path === "position") {
         current.value.position[obj.key] = value;
@@ -568,6 +544,7 @@ const propertyChange = (obj: any, value: any) => {
         emits("update");
     }
 };
+
 /***
  * 选择上传图片
  * @param tabsName 转到对应的选项卡
@@ -576,6 +553,7 @@ const propertyChange = (obj: any, value: any) => {
 const openUpload = (tabsName: string, key: string) => {
     uploadImageEl.value.open(tabsName, key);
 };
+
 const selectImg = (path: string, key: string) => {
     switch (key) {
         case "screenBg":
@@ -587,8 +565,8 @@ const selectImg = (path: string, key: string) => {
             break;
     }
 };
-// ace编辑器相关
 
+// ace编辑器相关
 const openDrawer = (type: string, isGlobal?: boolean) => {
     let codeType: string = "";
     let editData;
@@ -685,6 +663,15 @@ const openDrawer = (type: string, isGlobal?: boolean) => {
     };
     emits("openDrawer", emitsParams);
 };
+
+const saveChartoption = () => {
+    KDModel.invoke('saveoption', JSON.stringify(current.value.options))
+}
+
+const saveScreenOption = () => {
+    KDModel.invoke('saveconfig', JSON.stringify(props.config))
+}
+
 onBeforeRouteLeave(() => {
     unWatch(); //销毁监听器
 });
