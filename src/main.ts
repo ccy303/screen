@@ -22,15 +22,16 @@ import { useDataStore } from "@/store/data";
 
 const Component = {
     setup() {
-        onMounted(() => {
-            useDataStore().setData(jsonData);
-        });
+        onMounted(() => {});
         return () => h(App);
     }
 };
 
-// 实例化 Pinia
 const app = createApp(Component);
 app.component("echartsMap", Map);
 const pinia = createPinia();
 app.use(pinia).use(router).use(ElementPlus, { locale: zhCn }).mount(document.querySelector("#app"));
+
+setTimeout(() => {
+    useDataStore().setData(jsonData);
+}, 5000);

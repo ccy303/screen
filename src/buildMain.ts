@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp, h, onMounted } from "vue";
 import App from "./App.vue";
 //引入路由
 import router from "./router";
@@ -10,14 +10,22 @@ import "./assets/scss/element-var.scss";
 import "@/assets/scss/index.scss";
 //状态管理
 import { createPinia } from "pinia";
+import { useDataStore } from "@/store/data";
 
 import Map from "./views/components/map.vue";
-
+import jsonData from "./data.json";
 import "./js/ace/ace.js";
 import "./js/ace/ext-language_tools.js";
 import "./js/echarts.min.js";
 
-console.info("loadFile:js");
+const Component = {
+    setup() {
+        onMounted(() => {
+            useDataStore().setData(jsonData);
+        });
+        return () => h(App);
+    }
+};
 
 (function (KDApi) {
     function MyComponent(model) {
@@ -34,7 +42,7 @@ console.info("loadFile:js");
         },
         update: function (props) {
             console.log("-----update", this.model, props);
-            setHtml(this.model, props);
+            useDataStore().setData(props);
         },
         destoryed: function () {
             console.log("-----destoryed", this.model);
@@ -45,7 +53,7 @@ console.info("loadFile:js");
         console.info("setHtml");
         KDApi.loadFile("./assets/style.css", model, () => {
             const pinia = createPinia();
-            const app = createApp(App);
+            const app = createApp(Component);
             app.component("echartsMap", Map);
             app.provide("KDModel", model);
             app.provide("KDProps", props);
@@ -53,7 +61,6 @@ console.info("loadFile:js");
             app.use(router);
             app.use(ElementPlus, { locale: zhCn });
             setTimeout(() => {
-                // app.mount('#root');
                 app.mount(model.dom);
             });
         });

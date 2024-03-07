@@ -1,10 +1,9 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 export const useDataStore = defineStore("dataStore", () => {
-    const data = ref({});
+    const data = ref(null);
 
     const setData = (json: any) => {
-        console.log("setjson", json);
         data.value = json;
     };
 

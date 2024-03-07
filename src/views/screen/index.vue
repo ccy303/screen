@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, onBeforeUnmount, inject, watch } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount, inject, watch, nextTick } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { json2string, objToStringify, string2json, stringToObj, appendOrRemoveStyle, jsonParseStringify } from "@/utils/design";
 import { useDesignStore } from "@/store/design";
@@ -66,31 +66,30 @@ const screenData = ref({
  * 设计左侧图层信息
  */
 const setLayerList = () => {
-    controlLeftEl.value.setLayer(screenData.value.list);
+    nextTick(() => {
+        controlLeftEl.value.setLayer(screenData.value.list);
+    })
 };
 
-setTimeout(() => {
-    dataStore.setData({ a: 123 })
-}, 2000);
-
-watch(dataStore.data, (n: any) => {
-    console.log(1234, n);
-    // if (n) {
-    //     const data = n.data.data;
-    //     const resultData = {
-    //         ...data,
-    //         config: {
-    //             ...data.config,
-    //             id: data.id
-    //         }
-    //     };
-    //     if (resultData.config?.style) {
-    //         appendOrRemoveStyle("screenStyle", resultData.config.style, true);
-    //     }
-    //     window.getScreenGlobal = data;
-    //     screenData.value = resultData;
-    //     setLayerList();
-    // }
+watch(() => dataStore.data, (n: any) => {
+    console.log(n);
+    
+    if (n) {
+        const data = n.data.data;
+        const resultData = {
+            ...data,
+            config: {
+                ...data.config,
+                id: data.id
+            }
+        };
+        if (resultData.config?.style) {
+            appendOrRemoveStyle("screenStyle", resultData.config.style, true);
+        }
+        window.getScreenGlobal = data;
+        screenData.value = resultData;
+        setLayerList();
+    }
 }, { immediate: true, deep: true })
 
 /**
