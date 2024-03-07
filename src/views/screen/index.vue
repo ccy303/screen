@@ -18,10 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, onBeforeUnmount, inject } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount, inject, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { json2string, objToStringify, string2json, stringToObj, appendOrRemoveStyle, jsonParseStringify } from "@/utils/design";
-
 import { useDesignStore } from "@/store/design";
 import AceDrawer from "@/components/aceDrawer.vue";
 import VueFile from "@/components/vueFile.vue";
@@ -36,19 +35,14 @@ import { removeUnit } from "./utils";
 import RightMenu from "./components/rightMenu.vue";
 import { randomString } from "@/utils";
 import { getDrawerContent, getDrawerTitle } from "@/components/aceTooptip";
+import { useDataStore } from "@/store/data";
+
 
 const route = useRoute();
 const router = useRouter();
 
 const designStore = useDesignStore();
-
-/**
- * 左右两边工具栏显示隐藏控制
- * @param type
- */
-const toolVisible = (type: string) => {
-    return !designStore.getDataScreen(type);
-};
+const dataStore = useDataStore();
 const loading = ref(false);
 const preview = ref(false); // 预览模式
 const configEl = ref();
@@ -74,6 +68,39 @@ const screenData = ref({
 const setLayerList = () => {
     controlLeftEl.value.setLayer(screenData.value.list);
 };
+
+setTimeout(() => {
+    dataStore.setData({ a: 123 })
+}, 2000);
+
+watch(dataStore.data, (n: any) => {
+    console.log(1234, n);
+    // if (n) {
+    //     const data = n.data.data;
+    //     const resultData = {
+    //         ...data,
+    //         config: {
+    //             ...data.config,
+    //             id: data.id
+    //         }
+    //     };
+    //     if (resultData.config?.style) {
+    //         appendOrRemoveStyle("screenStyle", resultData.config.style, true);
+    //     }
+    //     window.getScreenGlobal = data;
+    //     screenData.value = resultData;
+    //     setLayerList();
+    // }
+}, { immediate: true, deep: true })
+
+/**
+ * 左右两边工具栏显示隐藏控制
+ * @param type
+ */
+const toolVisible = (type: string) => {
+    return !designStore.getDataScreen(type);
+};
+
 
 // 顶部工具栏点击事件
 const headToolsClick = (type: string) => {
@@ -528,28 +555,27 @@ const saveData = () => {
     //     });
 };
 
-const getData = () => {
-    loading.value = true;
-    getInitData(route.query.id)
-        .then((res: any) => {
-            console.log(res);
-            
-            loading.value = false;
-            screenData.value = res.screenData;
-            setLayerList();
-        })
-        .catch((res: any) => {
-            if (res?.screenData) {
-                //一个请求成功进
-                screenData.value = res.screenData;
-            }
-            loading.value = false;
-        });
-};
+// const getData = () => {
+//     loading.value = true;
+//     getInitData(route.query.id)
+//         .then((res: any) => {
+//             console.log(res);
+//             loading.value = false;
+//             screenData.value = res.screenData;
+//             setLayerList();
+//         })
+//         .catch((res: any) => {
+//             if (res?.screenData) {
+//                 //一个请求成功进
+//                 screenData.value = res.screenData;
+//             }
+//             loading.value = false;
+//         });
+// };
 
 //****************数据相关****************//
 onMounted(() => {
-    getData();
+    // getData();
 });
 onBeforeUnmount(() => { });
 

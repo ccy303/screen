@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp, h, onMounted } from "vue";
 import App from "./App.vue";
 //引入路由
 import router from "./router";
@@ -17,12 +17,20 @@ import "./js/ace/ace.js";
 import "./js/ace/ext-language_tools.js";
 import "./js/echarts.min.js";
 
+import jsonData from "./data.json";
+import { useDataStore } from "@/store/data";
+
+const Component = {
+    setup() {
+        onMounted(() => {
+            useDataStore().setData(jsonData);
+        });
+        return () => h(App);
+    }
+};
+
 // 实例化 Pinia
-const app = createApp(App);
-const pinia = createPinia();
+const app = createApp(Component);
 app.component("echartsMap", Map);
-app
-  .use(pinia)
-  .use(router)
-  .use(ElementPlus, { locale: zhCn })
-  .mount(document.querySelector("#app"));
+const pinia = createPinia();
+app.use(pinia).use(router).use(ElementPlus, { locale: zhCn }).mount(document.querySelector("#app"));
