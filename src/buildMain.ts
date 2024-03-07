@@ -34,7 +34,7 @@ console.info("loadFile:js");
         },
         update: function (props) {
             console.log("-----update", this.model, props);
-            updateHtml(this.model, props);
+            setHtml(this.model, props);
         },
         destoryed: function () {
             console.log("-----destoryed", this.model);
@@ -42,7 +42,6 @@ console.info("loadFile:js");
     };
 
     const setHtml = (model, props) => {
-        console.info("setHtml");
         KDApi.loadFile("./assets/style.css", model, () => {
             const app = createApp(App);
             app.component("echartsMap", Map);
