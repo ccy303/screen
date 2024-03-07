@@ -1,0 +1,141 @@
+{
+    "data": {
+        "data": {
+            "id": "1900953719554954240",
+            "list": [
+                {
+                    "pluginname": "plugin1",
+                    "position": {
+                        "top": 16,
+                        "left": 5,
+                        "width": 400,
+                        "height": 300
+                    },
+                    "id": "1900953719731115008",
+                    "type": "bar",
+                    "config": {
+                        "versiondescribe": "1",
+                        "ispublish": 1,
+                        "pluginName": "plugin1",
+                        "optionsType": 1,
+                        "version": "1"
+                    },
+                    "option": {
+                        "yAxis": {
+                            "type": "value"
+                        },
+                        "xAxis": {
+                            "data": [
+                                "Mon",
+                                "Tue",
+                                "Wed",
+                                "Thu",
+                                "Fri",
+                                "Sat",
+                                "Sun"
+                            ],
+                            "type": "category"
+                        },
+                        "grid": {
+                            "top": 0,
+                            "left": 0,
+                            "bottom": 30,
+                            "right": 0
+                        },
+                        "series": [
+                            {
+                                "data": [
+                                    120,
+                                    200,
+                                    150,
+                                    80,
+                                    70,
+                                    110,
+                                    130
+                                ],
+                                "type": "bar"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "pluginname": "plugiin0",
+                    "position": {
+                        "top": 23,
+                        "left": 1355,
+                        "width": 300,
+                        "height": 300
+                    },
+                    "id": "1900953719738993664",
+                    "type": "pie",
+                    "config": {
+                        "versiondescribe": "1",
+                        "ispublish": 1,
+                        "pluginName": "plugiin0",
+                        "optionsType": 1,
+                        "version": "1"
+                    },
+                    "option": {
+                        "grid": {
+                            "top": 0,
+                            "left": 0,
+                            "bottom": 0,
+                            "right": 0
+                        },
+                        "series": [
+                            {
+                                "data": [
+                                    {
+                                        "name": "Search Engine",
+                                        "value": 1048
+                                    },
+                                    {
+                                        "name": "Direct",
+                                        "value": 735
+                                    },
+                                    {
+                                        "name": "Email",
+                                        "value": 580
+                                    },
+                                    {
+                                        "name": "Union Ads",
+                                        "value": 484
+                                    },
+                                    {
+                                        "name": "Video Ads",
+                                        "value": 300
+                                    }
+                                ],
+                                "type": "pie",
+                                "radius": "50%"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "config": {
+                "primary": "#409eff",
+                "versiondescribe": "1",
+                "ispublish": 1,
+                "width": "1920px",
+                "height": "1080px",
+                "name": "账户运营",
+                "background": "#000",
+                "style": "",
+                "version": "1",
+                "configtag": "tda_banks"
+            }
+        }
+    },
+    "configItems": [
+        {
+            "key": "configtag",
+            "value": "tda_banks"
+        }
+    ],
+    "lock": false,
+    "lang": "zh_CN",
+    "themeColor": "blue",
+    "themeNum": "#5582F3",
+    "cardRowData": null
+}
