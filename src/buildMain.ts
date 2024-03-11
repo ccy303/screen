@@ -21,6 +21,7 @@ import "./js/echarts.min.js";
 const Component = {
     setup() {
         onMounted(() => {
+            console.info("app加载初始化数据", jsonData);
             useDataStore().setData(jsonData);
         });
         return () => h(App);
@@ -42,7 +43,8 @@ const Component = {
         },
         update: function (props) {
             console.log("-----update", this.model, props);
-            useDataStore().setData(props);
+            console.info("更新返回props", props);
+            props.data && useDataStore().setData(props);
         },
         destoryed: function () {
             console.log("-----destoryed", this.model);
