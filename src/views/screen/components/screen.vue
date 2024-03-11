@@ -1,94 +1,38 @@
 <!-- Created by weiXin:337547038 -->
 <template>
-<div
-    :class="{
-      ['group-' + data.type]: true,
-      [data.config?.class]: data.config?.class
-    }"
-    :style="positionStyle"
-    class="group"
-    @mousedown="stopPropagation"
->
-  <div
-      v-if="type === 0 && !data.config?.lock"
-      v-show="current"
-      class="resize-box"
-      @contextmenu="contextmenu"
-      @mousedown.left.stop="moveMousedown"
-  >
-      <span
-          v-show="data.type !== 'tempRect'"
-          v-for="item in 8"
-          :key="item"
-          :class="`rs${item}`"
-          @mousedown.stop="resizeDotMouseDown($event, item)"
-      ></span>
-    <div class="position">{{ JSON.stringify(props.data.position) }}</div>
+  <div :class="{
+    ['group-' + data.type]: true,
+    [data.config?.class]: data.config?.class
+  }" :style="positionStyle" class="group" @mousedown="stopPropagation">
+    <div v-if="type === 0 && !data.config?.lock" v-show="current" class="resize-box" @contextmenu="contextmenu"
+      @mousedown.left.stop="moveMousedown">
+      <span v-show="data.type !== 'tempRect'" v-for="item in 8" :key="item" :class="`rs${item}`"
+        @mousedown.stop="resizeDotMouseDown($event, item)"></span>
+      <div class="position">{{ JSON.stringify(props.data.position) }}</div>
+    </div>
+    <div class="text" v-if="['text', 'border'].includes(data.type)" :style="getConfigStyle"
+      v-html="newValue || config.text"></div>
+    <div v-if="data.type === 'sText'" :style="getConfigStyle">
+      <my-marquee :direction="config.direction" :height="`${data.position.height}px`" :speed="config.speed"
+        :step="config.step" :width="`${data.position.width}px`">
+        {{ newValue || config.text }}
+      </my-marquee>
+    </div>
+    <img v-if="data.type === 'image'" :src="config.src" :style="getConfigStyle" alt="请选择或上传图片" class="default-img" />
+    <div v-if="data.type === 'background'" :style="getBackground" class="default-bg">
+      <span v-if="!config.src">请选择或上传图片</span>
+    </div>
+    <div v-if="data.type === 'table'" ref="tableEl" class="screen-table">
+      <el-table v-bind="config.props" :data="tableData" :height="`${props.data.position.height}`" style="width: 100%">
+        <el-table-column v-bind="col" v-for="col in data.option?.columns" :key="col.prop" />
+      </el-table>
+    </div>
+    <now-time v-if="data.type === 'clock'" :config="config" :style="getConfigStyle" />
+    <component :is="config.component" v-bind="config" :height="data.position.height"
+      :width="data.position.width || '100%'" v-if="['component'].includes(data.type)" />
+    <echarts-init v-if="['line', 'bar', 'pie', 'echarts'].includes(data.type)" :height="data.position.height"
+      :option="(newValue || data.option) as any" :width="data.position.width || '100%'" />
   </div>
-  <div
-      class="text"
-      v-if="['text', 'border'].includes(data.type)"
-      :style="getConfigStyle"
-      v-html="newValue || config.text"
-  ></div>
-  <div v-if="data.type === 'sText'" :style="getConfigStyle">
-    <my-marquee
-        :direction="config.direction"
-        :height="`${data.position.height}px`"
-        :speed="config.speed"
-        :step="config.step"
-        :width="`${data.position.width}px`"
-    >
-      {{ newValue || config.text }}
-    </my-marquee>
-  </div>
-  <img
-      v-if="data.type === 'image'"
-      :src="config.src"
-      :style="getConfigStyle"
-      alt="请选择或上传图片"
-      class="default-img"
-  />
-  <div
-      v-if="data.type === 'background'"
-      :style="getBackground"
-      class="default-bg"
-  >
-    <span v-if="!config.src">请选择或上传图片</span>
-  </div>
-  <div v-if="data.type === 'table'" ref="tableEl" class="screen-table">
-    <el-table
-        v-bind="config.props"
-        :data="tableData"
-        :height="`${props.data.position.height}`"
-        style="width: 100%"
-    >
-      <el-table-column
-          v-bind="col"
-          v-for="col in data.option?.columns"
-          :key="col.prop"
-      />
-    </el-table>
-  </div>
-  <now-time
-      v-if="data.type === 'clock'"
-      :config="config"
-      :style="getConfigStyle"
-  />
-  <component
-      :is="config.component"
-      v-bind="config"
-      :height="data.position.height"
-      :width="data.position.width || '100%'"
-      v-if="['component'].includes(data.type)"
-  />
-  <echarts-init
-      v-if="['line', 'bar', 'pie', 'echarts'].includes(data.type)"
-      :height="data.position.height"
-      :option="(newValue || data.option) as any"
-      :width="data.position.width || '100%'"
-  />
-</div>
 </template>
 
 <script lang="ts" setup>
@@ -101,26 +45,26 @@ import {
   reactive,
   onBeforeUnmount
 } from 'vue'
-import {onBeforeRouteLeave} from 'vue-router'
+import { onBeforeRouteLeave } from 'vue-router'
 import NowTime from './nowTime.vue'
 import MyMarquee from './marquee.vue'
 import EchartsInit from '@/components/echartsInt.vue'
-import type {ScreenData, UpdatePosition, Contextmenu} from '../types'
+import type { ScreenData, UpdatePosition, Contextmenu } from '../types'
 import formatScreen from '@/utils/formatScreen'
-import {cannotDragResize, addUnit, removeUnit} from '../utils'
-import {requestResponse} from '@/utils/requestResponse.ts'
+import { cannotDragResize, addUnit, removeUnit } from '../utils'
+import { requestResponse } from '@/utils/requestResponse.ts'
 
 const props = withDefaults(
-    defineProps<{
-      data: ScreenData
-      type?: number
-      current?: boolean // 当前激活的项index
-      scale?: number
-    }>(),
-    {
-      type: 1,
-      scale: 100
-    }
+  defineProps<{
+    data: ScreenData
+    type?: number
+    current?: boolean // 当前激活的项index
+    scale?: number
+  }>(),
+  {
+    type: 1,
+    scale: 100
+  }
 )
 const emits = defineEmits<{
   (e: 'contextmenu', data: Contextmenu): void
@@ -139,15 +83,15 @@ const config = computed(() => {
 // 组件自定配置编辑的样式+定位时的宽高
 const getConfigStyle = computed(() => {
   return Object.assign(
-      {},
-      {width: '100%', height: '100%'},
-      config.value.style || {}
+    {},
+    { width: '100%', height: '100%' },
+    config.value.style || {}
   )
 })
 const getBackground = computed(() => {
   let src = {}
   if (config.value.src) {
-    src = {backgroundImage: `url(${config.value.src})`}
+    src = { backgroundImage: `url(${config.value.src})` }
   }
   return Object.assign(config.value.style || {}, src)
 })
@@ -156,8 +100,8 @@ const positionStyle = computed(() => {
   if (!props.data.position) {
     return {}
   }
-  const {left, top, height, width, zIndex, display, right, bottom} =
-      props.data.position
+  const { left, top, height, width, zIndex, display, right, bottom } =
+    props.data.position
   // 设置了right时left为auto，设置了bottom时top为auto
   const right2 = addUnit(right)
   const bottom2 = addUnit(bottom)
@@ -186,7 +130,7 @@ const resizeDotMouseDown = (evt: MouseEvent, index: number) => {
   let flag = true
   const x = evt.pageX
   const y = evt.pageY
-  const {width, height, left, top} = props.data.position
+  const { width, height, left, top } = props.data.position
   if (cannotDragResize(props.data.position, true)) {
     return
   }
@@ -272,7 +216,7 @@ const moveMousedown = (evt: MouseEvent) => {
     return
   }
   // 设置了right或bottom时不能拖动
-  const {left, top} = props.data.position
+  const { left, top } = props.data.position
   state.moveFlag = true
   const startX = evt.pageX
   const startY = evt.pageY
@@ -333,9 +277,9 @@ const tableData = computed(() => {
 const tableEl = ref()
 const setTableCarousel = () => {
   if (
-      !config.value.carousel ||
-      !tableEl.value ||
-      props.data.type !== 'table'
+    !config.value.carousel ||
+    !tableEl.value ||
+    props.data.type !== 'table'
   ) {
     return
   }
@@ -357,13 +301,13 @@ const setTableCarousel = () => {
   }
 }
 const unWatch = watch(
-    () => props.data.option?.list,
-    () => {
-      nextTick(() => {
-        setTableCarousel()
-      })
-    },
-    {immediate: true}
+  () => props.data.option?.list,
+  () => {
+    nextTick(() => {
+      setTableCarousel()
+    })
+  },
+  { immediate: true }
 )
 // 设置表格滚动结束
 // 获取动态数据相关
@@ -398,38 +342,38 @@ const getUrlData = () => {
   if (['image', 'background', 'border', 'clock'].includes(props.data.type)) {
     return // 不支持动态数据获取的return
   }
-  const {optionsType, requestUrl, method = 'post'} = config.value
-  const {beforeFetch, afterFetch} = props.data.events || {}
+  const { optionsType, requestUrl, method = 'post' } = config.value
+  const { beforeFetch, afterFetch } = props.data.events || {}
   if (optionsType === 1 && requestUrl) {
     requestResponse({
       requestUrl,
       params: {},
       beforeFetch,
       //afterFetch,这里不能传after事件，这个要特殊处理。回调的参数不一样
-      options: {method: method}
+      options: { method: method }
       //route
     })
-        .then((res: any) => {
-          const resultData = res.data
-          if (typeof afterFetch === 'function') {
-            requestResult.value = afterFetch(resultData, getDataByType.value)
-          } else {
-            requestResult.value = formatScreen(
-                afterFetch,
-                resultData,
-                getDataByType.value
-            )
-          }
-        })
-        .catch((res: any) => {
-          console.log(res)
-        })
+      .then((res: any) => {
+        const resultData = res.data
+        if (typeof afterFetch === 'function') {
+          requestResult.value = afterFetch(resultData, getDataByType.value)
+        } else {
+          requestResult.value = formatScreen(
+            afterFetch,
+            resultData,
+            getDataByType.value
+          )
+        }
+      })
+      .catch((res: any) => {
+        console.log(res)
+      })
   }
 }
 // 获取动态数据相关结束
 // 鼠标右键事件
 const contextmenu = (evt: MouseEvent) => {
-  emits('contextmenu', {x: evt.pageX, y: evt.pageY, type: props.data.type})
+  emits('contextmenu', { x: evt.pageX, y: evt.pageY, type: props.data.type })
   evt.preventDefault()
 }
 onBeforeRouteLeave(() => {
