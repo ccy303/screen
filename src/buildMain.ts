@@ -21,8 +21,8 @@ import "./js/echarts.min.js";
 const Component = {
     setup() {
         onMounted(() => {
-            console.info("app加载初始化数据", jsonData);
-            useDataStore().setData(jsonData);
+            // console.info("app加载初始化数据", jsonData);
+            // useDataStore().setData(jsonData);
         });
         return () => h(App);
     }
@@ -44,7 +44,15 @@ const Component = {
         update: function (props) {
             console.log("-----update", this.model, props);
             console.info("更新返回props", props);
-            props.data && useDataStore().setData(props);
+            if (props.data.data.invokeKey == "selectconfig") {
+                props.data && useDataStore().setData(props.data.data);
+            } else if (props.data.data.invokeKey == "optionversion") {
+                console.log(props.data);
+                // const dataStore = useDataStore();
+                // props.data && useDataStore().setData({ ...dataStore.data });
+            } else if (props.data.data.invokeKey == "configversion") {
+                props.data && useDataStore().setData(props.data.data);
+            }
         },
         destoryed: function () {
             console.log("-----destoryed", this.model);

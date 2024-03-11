@@ -5,6 +5,13 @@
         <el-tabs class="tabs" model-value="position">
             <el-tab-pane label="属性配置" name="position">
                 <el-form size="small">
+                    <el-form-item label="版本筛选" v-if="current.optionversions">
+                        <el-select v-model="currentOptionVersion" @change="optionVersionChange">
+                            <el-tooltip :content="item.versiondescribe" v-for="(item, idx) in current.optionversions" :key="idx">
+                                <el-option :value="item.version">{{ item.version }}</el-option>
+                            </el-tooltip>
+                        </el-select>
+                    </el-form-item>
                     <el-form-item :label="item.label" v-for="(item, index) in positionProperty" :key="index">
                         <h3 v-if="item.type === 'group'">{{ item.title }}</h3>
                         <el-switch
@@ -99,7 +106,6 @@
                             <el-input v-model="current.config.pluginName" placeholder="插件标识" />
                         </el-form-item>
                     </template>
-
                     <template v-if="current.id">
                         <el-form-item>
                             <el-button type="primary" @click="saveChartoption">保存配置</el-button>
@@ -109,6 +115,13 @@
             </el-tab-pane>
             <el-tab-pane label="大屏配置" name="screen">
                 <el-form size="small" :rules="[]">
+                    <el-form-item label="版本筛选" v-if="config.configversion">
+                        <el-select v-model="currentConfigVersion" @change="configVersionChange">
+                            <el-tooltip :content="item.versiondescribe" v-for="(item, idx) in config.configversion" :key="idx">
+                                <el-option :value="item.version">{{ item.version }}</el-option>
+                            </el-tooltip>
+                        </el-select>
+                    </el-form-item>
                     <el-form-item label="大屏名称">
                         <el-input placeholder="请输入大屏名称" :model-value="config.name" @input="configChange('name', $event)" />
                     </el-form-item>
@@ -153,7 +166,6 @@
                     <el-form-item v-if="state.bgSelect !== 3" class="color-picker">
                         <el-color-picker show-alpha v-model="state.bgColor" @change="stateChange" />
                     </el-form-item>
-
                     <template v-if="state.bgSelect === 2">
                         <el-form-item class="color-picker">
                             <el-color-picker show-alpha v-model="state.bgLinear" @change="stateChange" />
@@ -172,7 +184,6 @@
                     <el-form-item label="刷新时间">
                         <el-input-number disabled :model-value="config.loopTime" @input="configChange('loopTime', $event)" />
                     </el-form-item>
-
                     <template v-if="config.id">
                         <el-form-item>
                             <el-button type="primary" @click="saveScreenOption">保存配置</el-button>
@@ -192,6 +203,9 @@
     import UploadImage from "./upload.vue";
     import { useDesignStore } from "@/store/design";
 
+    import jsonData from "@/data.json";
+    import { useDataStore } from "@/store/data";
+
     const KDModel = inject("KDModel");
 
     const props: any = withDefaults(
@@ -200,6 +214,9 @@
         }>(),
         {}
     );
+
+    const currentOptionVersion = ref();
+    const currentConfigVersion = ref();
 
     const emits: any = defineEmits<{
         (e: "update:config", val: Config): void;
@@ -212,6 +229,23 @@
     const current: any = computed(() => {
         return designStore.screenControlAttr;
     });
+
+    watch(
+        () => current.value,
+        n => {
+            currentOptionVersion.value = n.config.version;
+        }
+    );
+
+    watch(
+        () => props.config,
+        n => {
+            currentConfigVersion.value = n.version;
+        },
+        {
+            immediate: true
+        }
+    );
 
     const isLockDisplay = computed(() => {
         return current.value?.config?.lock || current.value?.position?.display;
@@ -699,6 +733,25 @@
 
     const screenSearch = () => {
         KDModel.invoke("selectconfig", props.config.configtag);
+    };
+
+    const optionVersionChange = id => {
+        const idx = useDataStore().data.list.findIndex(item => item.id == current.value.id);
+
+        if (idx != -1) {
+            const list = [...useDataStore().data.list];
+            list.splice(idx, 1, { ...useDataStore().data.list[idx], pluginname: "23456" });
+            useDataStore().setData({ ...useDataStore().data, list: [...list] });    
+            console.log(useDataStore().data)
+        }
+
+        // const target = current.value.optionversions.find(item => item.version == id);
+        // KDModel.invoke("optionversion", JSON.stringify(target));
+    };
+
+    const configVersionChange = id => {
+        const target = props.config.configversion.find(item => item.version == id);
+        KDModel.invoke("configversion", JSON.stringify(target));
     };
 
     onBeforeRouteLeave(() => {

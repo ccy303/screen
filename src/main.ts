@@ -33,5 +33,5 @@ const pinia = createPinia();
 app.use(pinia).use(router).use(ElementPlus, { locale: zhCn }).mount(document.querySelector("#app"));
 
 setTimeout(() => {
-    useDataStore().setData(jsonData);
-}, 5000);
+    useDataStore().setData(jsonData.data.data);
+});

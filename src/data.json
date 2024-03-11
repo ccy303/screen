@@ -40,7 +40,12 @@
                                 "type": "bar"
                             }
                         ]
-                    }
+                    },
+                    "optionversions": [
+                        { "id": "1900953719731115008", "version": "1", "versiondescribe": "1" },
+                        { "id": "1900953719731115008", "version": "2", "versiondescribe": "2" },
+                        { "id": "1900953719731115008", "version": "3", "versiondescribe": "3" }
+                    ]
                 },
                 {
                     "pluginname": "plugiin0",
@@ -94,7 +99,12 @@
                                 "radius": "50%"
                             }
                         ]
-                    }
+                    },
+                    "optionversions": [
+                        { "id": "1900953719738993664", "version": "1", "versiondescribe": "1" },
+                        { "id": "1900953719738993664", "version": "2", "versiondescribe": "2" },
+                        { "id": "1900953719738993664", "version": "3", "versiondescribe": "3" }
+                    ]
                 }
             ],
             "config": {
@@ -106,8 +116,13 @@
                 "name": "账户运营",
                 "background": "#000",
                 "style": "",
-                "version": "1",
-                "configtag": "tda_banks"
+                "version": "2",
+                "configtag": "tda_banks",
+                "configversion": [
+                    { "id": "1900953719554954240", "version": "1", "versiondescribe": "123123" },
+                    { "id": "1900953719554954240", "version": "2", "versiondescribe": "2123123" },
+                    { "id": "1900953719554954240", "version": "3", "versiondescribe": "312312" }
+                ]
             }
         }
     },
