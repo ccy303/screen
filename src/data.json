@@ -20,7 +20,7 @@
                         "ispublish": 1,
                         "pluginName": "plugin1",
                         "optionsType": 1,
-                        "version": "1"
+                        "version": "v1"
                     },
                     "option": {
                         "yAxis": {
@@ -44,9 +44,9 @@
                         ]
                     },
                     "optionversion": [
-                        { "id": "1900953719731115008", "version": "1", "versiondescribe": "1" },
-                        { "id": "1900953719731115008", "version": "2", "versiondescribe": "2" },
-                        { "id": "1900953719731115008", "version": "3", "versiondescribe": "3" }
+                        { "id": "1900953719731115008", "version": "v1", "versiondescribe": "1", "isinitial": 1 },
+                        { "id": "1900953719731115008", "version": "v2", "versiondescribe": "2" },
+                        { "id": "1900953719731115008", "version": "v3", "versiondescribe": "3" }
                     ]
                 },
                 {
@@ -64,7 +64,7 @@
                         "ispublish": 1,
                         "pluginName": "plugiin0",
                         "optionsType": 1,
-                        "version": "1"
+                        "version": "v2"
                     },
                     "option": {
                         "grid": {
@@ -105,9 +105,9 @@
                     "optionnumber": "optionnumber",
                     "isinitial": "isinitial",
                     "optionversion": [
-                        { "id": "1900953719738993664", "version": "1", "versiondescribe": "1" },
-                        { "id": "1900953719738993664", "version": "2", "versiondescribe": "2" },
-                        { "id": "1900953719738993664", "version": "3", "versiondescribe": "3" }
+                        { "id": "1900953719738993664", "version": "v1", "versiondescribe": "1", "isinitial": 1 },
+                        { "id": "1900953719738993664", "version": "v2", "versiondescribe": "2" },
+                        { "id": "1900953719738993664", "version": "v3", "versiondescribe": "3" }
                     ]
                 }
             ],
@@ -120,16 +120,16 @@
                 "name": "账户运营",
                 "background": "#000",
                 "style": "",
-                "version": "2",
+                "version": "v3",
                 "configtag": "tda_banks",
                 "optionnumber": "1900953719554954240",
                 "themecode": "themecode",
                 "themename": "themename",
                 "isinitial": "isinitial",
                 "configversion": [
-                    { "id": "1900953719554954240", "version": "1", "versiondescribe": "123123" },
-                    { "id": "1900953719554954240", "version": "2", "versiondescribe": "2123123" },
-                    { "id": "1900953719554954240", "version": "3", "versiondescribe": "312312" }
+                    { "id": "1900953719554954240", "version": "v1", "versiondescribe": "123123", "isinitial": 1 },
+                    { "id": "1900953719554954240", "version": "v2", "versiondescribe": "2123123" },
+                    { "id": "1900953719554954240", "version": "v3", "versiondescribe": "312312" }
                 ]
             }
         }

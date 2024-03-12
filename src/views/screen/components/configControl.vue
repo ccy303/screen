@@ -7,9 +7,9 @@
                 <el-form size="small">
                     <el-form-item label="版本筛选" v-if="current.optionversion">
                         <el-select v-model="currentOptionVersion" @change="optionVersionChange">
-                            <el-tooltip :content="item.versiondescribe" v-for="(item, idx) in current.optionversion"
-                                :key="idx">
-                                <el-option :value="item.version">{{ item.version }}</el-option>
+                            <el-tooltip :content="item.versiondescribe"
+                                v-for="(item, idx) in formatVersionCfg(current.optionversion)" :key="idx">
+                                <el-option :value="item.version" :label="item.versionLabel" />
                             </el-tooltip>
                         </el-select>
                     </el-form-item>
@@ -93,9 +93,9 @@
                 <el-form size="small" :rules="[]">
                     <el-form-item label="版本筛选" v-if="config.configversion">
                         <el-select v-model="currentConfigVersion" @change="configVersionChange">
-                            <el-tooltip :content="item.versiondescribe" v-for="(item, idx) in config.configversion"
-                                :key="idx">
-                                <el-option :value="item.version">{{ item.version }}</el-option>
+                            <el-tooltip :content="item.versiondescribe"
+                                v-for="(item, idx) in formatVersionCfg(config.configversion)" :key="idx">
+                                <el-option :value="item.version" :label="item.versionLabel" />
                             </el-tooltip>
                         </el-select>
                     </el-form-item>
@@ -741,6 +741,17 @@ const configVersionChange = (id: any) => {
     const target = props.config.configversion.find((item: any) => item.version == id);
     KDModel.invoke("configversion", JSON.stringify(target));
 };
+
+const formatVersionCfg = (list: any) => {
+    const data = list.map((item: any) => {
+        if (item.isinitial) {
+            return { ...item, versionLabel: `${item.version}(初始)` }
+        } else {
+            return { ...item, versionLabel: item.version }
+        }
+    })
+    return data
+}
 
 onBeforeRouteLeave(() => {
     unWatch(); //销毁监听器
