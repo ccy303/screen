@@ -41,7 +41,7 @@
                             }
                         ]
                     },
-                    "optionversions": [
+                    "optionversion": [
                         { "id": "1900953719731115008", "version": "1", "versiondescribe": "1" },
                         { "id": "1900953719731115008", "version": "2", "versiondescribe": "2" },
                         { "id": "1900953719731115008", "version": "3", "versiondescribe": "3" }
@@ -100,7 +100,7 @@
                             }
                         ]
                     },
-                    "optionversions": [
+                    "optionversion": [
                         { "id": "1900953719738993664", "version": "1", "versiondescribe": "1" },
                         { "id": "1900953719738993664", "version": "2", "versiondescribe": "2" },
                         { "id": "1900953719738993664", "version": "3", "versiondescribe": "3" }
