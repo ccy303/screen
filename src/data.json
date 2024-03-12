@@ -13,6 +13,8 @@
                     },
                     "id": "1900953719731115008",
                     "type": "bar",
+                    "optionnumber": "optionnumber",
+                    "isinitial": "isinitial",
                     "config": {
                         "versiondescribe": "1",
                         "ispublish": 1,
@@ -100,6 +102,8 @@
                             }
                         ]
                     },
+                    "optionnumber": "optionnumber",
+                    "isinitial": "isinitial",
                     "optionversion": [
                         { "id": "1900953719738993664", "version": "1", "versiondescribe": "1" },
                         { "id": "1900953719738993664", "version": "2", "versiondescribe": "2" },
@@ -118,6 +122,10 @@
                 "style": "",
                 "version": "2",
                 "configtag": "tda_banks",
+                "optionnumber": "1900953719554954240",
+                "themecode": "themecode",
+                "themename": "themename",
+                "isinitial": "isinitial",
                 "configversion": [
                     { "id": "1900953719554954240", "version": "1", "versiondescribe": "123123" },
                     { "id": "1900953719554954240", "version": "2", "versiondescribe": "2123123" },
