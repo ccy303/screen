@@ -47,8 +47,8 @@ const Component = {
             if (props.data.data.invokeKey == "selectconfig") {
                 console.info("selectconfig", props.data);
                 props.data && useDataStore().setData(props.data.data);
-            } else if (props.data.data.invokeKey == "optionversion") {
-                console.info("optionversion", props.data);
+            } else if (["refresh", "optionversion"].includes(props.data.data.invokeKey)) {
+                console.info(props.data.data.invokeKey, props.data);
                 const { data: originData } = useDataStore();
                 const idx = originData.list.findIndex((item: any) => item.id == props.data.data.id);
                 if (idx != -1) {
