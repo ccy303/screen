@@ -23,11 +23,21 @@
                         "version": "v1"
                     },
                     "option": {
+                        "dataset": {
+                            "source": [
+                                ["Mon", 120],
+                                ["Tue", 200],
+                                ["Wed", 300],
+                                ["Thu", 400],
+                                ["Fri", 500],
+                                ["Sat", 600],
+                                ["Sun", 700]
+                            ]
+                        },
                         "yAxis": {
                             "type": "value"
                         },
                         "xAxis": {
-                            "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
                             "type": "category"
                         },
                         "grid": {
@@ -36,12 +46,7 @@
                             "bottom": 30,
                             "right": 0
                         },
-                        "series": [
-                            {
-                                "data": [120, 200, 150, 80, 70, 110, 130],
-                                "type": "bar"
-                            }
-                        ]
+                        "series": [{ "type": "bar" }]
                     },
                     "optionversion": [
                         { "id": "1900953719731115008", "version": "v1", "versiondescribe": "1", "isinitial": 1 },
@@ -67,6 +72,16 @@
                         "version": "v2"
                     },
                     "option": {
+                        "dataset": {
+                            "source": [
+                                ["Search Engine", 1048],
+                                ["Direct", 35],
+                                ["Email", 80],
+                                ["Union Ads", 484],
+                                ["Video Ads", 300],
+                                ["Test", 1300]
+                            ]
+                        },
                         "grid": {
                             "top": 0,
                             "left": 0,
@@ -75,28 +90,6 @@
                         },
                         "series": [
                             {
-                                "data": [
-                                    {
-                                        "name": "Search Engine",
-                                        "value": 1048
-                                    },
-                                    {
-                                        "name": "Direct",
-                                        "value": 735
-                                    },
-                                    {
-                                        "name": "Email",
-                                        "value": 580
-                                    },
-                                    {
-                                        "name": "Union Ads",
-                                        "value": 484
-                                    },
-                                    {
-                                        "name": "Video Ads",
-                                        "value": 300
-                                    }
-                                ],
                                 "type": "pie",
                                 "radius": "50%"
                             }

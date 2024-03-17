@@ -6,15 +6,8 @@
         <div class="components-list scroll">
           <div v-for="(item, index) in controlList" :key="index">
             <div class="title">{{ item.label }}</div>
-            <draggable
-              itemKey="label"
-              tag="ul"
-              v-model="item.children"
-              :group="{ name: 'form', pull: 'clone', put: false }"
-              ghost-class="ghost"
-              :sort="false"
-              :clone="clone"
-            >
+            <draggable itemKey="label" tag="ul" v-model="item.children"
+              :group="{ name: 'form', pull: 'clone', put: false }" ghost-class="ghost" :sort="false" :clone="clone">
               <template #item="{ element }">
                 <li :class="[element.type]">
                   <i :class="`icon-${element.icon}`"></i>
@@ -28,34 +21,19 @@
       <el-tab-pane label="图层" name="layer">
         <div class="scroll layer-list">
           <ul>
-            <li
-              v-for="(element, index) in layerList"
-              :key="index"
-              :class="{
-                active: active.includes(element.index),
-                lock: element.lock,
-                display: element.display,
-                isGroup: element.groupId && !element.type,
-              }"
-            >
-              <span @click="showLockClick(element, 'active')"
-                ><i :class="`icon-${element.icon}`"></i>
-                {{ element.label }}</span
-              >
-              <i
-                @click="showLockClick(element, 'display')"
-                class="icon"
-                :class="[element.display ? 'icon-eye-close' : 'icon-eye']"
-              ></i>
-              <i
-                @click="showLockClick(element, 'lock')"
-                class="icon"
-                :class="[element.lock ? 'icon-lock' : 'icon-lock-open']"
-              ></i>
-              <el-popconfirm
-                title="确认删除"
-                @confirm="showLockClick({ index: element.index }, 'del')"
-              >
+            <li v-for="(element, index) in layerList" :key="index" :class="{
+            active: active.includes(element.index),
+            lock: element.lock,
+            display: element.display,
+            isGroup: element.groupId && !element.type,
+          }">
+              <span @click="showLockClick(element, 'active')"><i :class="`icon-${element.icon}`"></i>
+                {{ element.label }}</span>
+              <i @click="showLockClick(element, 'display')" class="icon"
+                :class="[element.display ? 'icon-eye-close' : 'icon-eye']"></i>
+              <i @click="showLockClick(element, 'lock')" class="icon"
+                :class="[element.lock ? 'icon-lock' : 'icon-lock-open']"></i>
+              <el-popconfirm title="确认删除" @confirm="showLockClick({ index: element.index }, 'del')">
                 <template #reference>
                   <i class="icon-del"></i>
                 </template>
@@ -106,74 +84,50 @@ const controlList = ref([
         type: "line",
         label: dict.line[0],
         icon: dict.line[1],
-        position: {
-          width: 400,
-          height: 300,
-        },
+        position: { width: 400, height: 300, },
         option: {
-          xAxis: {
-            type: "category",
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          dataset: {
+            source: [["Mon", 100], ["Tue", 200], ["Wed", 300], ["Thu", 400], ["Fri", 500], ["Sat", 600], ["Sun", 700],]
           },
-          yAxis: {
-            type: "value",
-          },
+          xAxis: { type: "category", },
+          yAxis: { type: "value", },
           grid: { left: 0, top: 0, right: 0, bottom: 30 },
-          series: [
-            {
-              data: [150, 230, 224, 218, 135, 147, 260],
-              type: "line",
-            },
-          ],
+          series: [{ type: "line", }],
         },
       },
       {
         type: "bar",
         label: dict.bar[0],
         icon: dict.bar[1],
-        position: {
-          width: 400,
-          height: 300,
-        },
+        position: { width: 400, height: 300, },
         option: {
-          xAxis: {
-            type: "category",
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          dataset: {
+            source: [["Mon", 100], ["Tue", 200], ["Wed", 300], ["Thu", 400], ["Fri", 500], ["Sat", 600], ["Sun", 700],]
           },
-          yAxis: {
-            type: "value",
-          },
+          xAxis: { type: "category", },
+          yAxis: { type: "value", },
           grid: { left: 0, top: 0, right: 0, bottom: 30 },
-          series: [
-            {
-              data: [120, 200, 150, 80, 70, 110, 130],
-              type: "bar",
-            },
-          ],
+          series: [{ type: "bar", }],
         },
       },
       {
         type: "pie",
         label: dict.pie[0],
         icon: dict.pie[1],
-        position: {
-          width: 300,
-          height: 300,
-        },
+        position: { width: 300, height: 300, },
         option: {
           grid: { left: 0, top: 0, right: 0, bottom: 0 },
+          dataset: {
+            source: [
+              ["Search Engine", 100],
+              ["Direct", 200],
+              ["Email", 300],
+              ["Union Ads", 400],
+              ["Video Ads", 500],
+            ]
+          },
           series: [
-            {
-              type: "pie",
-              radius: "50%",
-              data: [
-                { value: 1048, name: "Search Engine" },
-                { value: 735, name: "Direct" },
-                { value: 580, name: "Email" },
-                { value: 484, name: "Union Ads" },
-                { value: 300, name: "Video Ads" },
-              ],
-            },
+            { type: "pie", radius: "50%", },
           ],
         },
       },
@@ -181,11 +135,11 @@ const controlList = ref([
         type: "echarts",
         label: dict.echarts[0],
         icon: dict.echarts[1],
-        position: {
-          width: 400,
-          height: 300,
-        },
+        position: { width: 400, height: 300, },
         option: {
+          dataset: {
+            source: [],
+          },
           grid: { left: 0, top: 0, right: 0, bottom: 0 },
         },
       },
@@ -198,10 +152,7 @@ const controlList = ref([
         type: "table",
         label: dict.table[0],
         icon: dict.table[1],
-        position: {
-          width: 500,
-          height: 300,
-        },
+        position: { width: 500, height: 300, },
         option: {
           columns: [],
           list: [],
