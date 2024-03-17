@@ -102,6 +102,21 @@
                         { "id": "1900953719738993664", "version": "v2", "versiondescribe": "2" },
                         { "id": "1900953719738993664", "version": "v3", "versiondescribe": "3" }
                     ]
+                },
+                {
+                    "type": "text",
+                    "position": {
+                        "width": 315,
+                        "height": 67,
+                        "left": 489,
+                        "top": -64
+                    },
+                    "config": {
+                        "text": "货到付款决定是否可见好的反抗精神的快捷方式的接口和司法会计的发生的发生的",
+                        "style": {
+                            "fontSize": "30px"
+                        }
+                    }
                 }
             ],
             "config": {

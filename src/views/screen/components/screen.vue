@@ -6,7 +6,7 @@
             [data.config?.class]: data.config?.class
         }"
         :style="positionStyle"
-        class="group"
+        class="group relative"
         @mousedown="stopPropagation"
     >
         <div
@@ -392,3 +392,9 @@
     });
     onBeforeUnmount(() => {});
 </script>
+
+<style lang="scss" scoped>
+    .relative {
+        position: relative;
+    }
+</style>
