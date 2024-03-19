@@ -50,7 +50,7 @@
                 },
                 {
                     "pluginname": "plugiin0",
-                    "position": { "top": 23, "left": 1355, "width": 300, "height": 300 },
+                    "position": { "top": 123, "left": 1355, "width": 300, "height": 300 },
                     "id": "1900953719738993664",
                     "type": "pie",
                     "config": { "versiondescribe": "1", "ispublish": 1, "pluginName": "plugiin0", "optionsType": 1, "version": "v2" },
@@ -133,7 +133,7 @@
                         "width": 315,
                         "height": 67,
                         "left": 489,
-                        "top": -64
+                        "top": 364
                     },
                     "config": {
                         "text": "货到付款决定是否可见好的反抗精神的快捷方式的接口和司法会计的发生的发生的",

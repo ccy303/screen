@@ -3,7 +3,7 @@
     <div
         :class="{ ['group-' + data.type]: true, [data.config?.class]: data.config?.class }"
         :style="positionStyle"
-        class="group relative"
+        class="group absolute"
         @mousedown="stopPropagation"
     >
         <div

@@ -151,6 +151,8 @@
         obj.position.left = addUnit(pageX - state.offset[0] + state.scroll[0]);
         obj.position.top = addUnit(pageY - state.offset[1] + state.scroll[1]);
         state.activeIndex = newIndex;
+        console.log(obj.position);
+
         setCurrentConfig(obj);
         emits("draggableAdd");
     };

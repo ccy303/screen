@@ -17,8 +17,8 @@ import "./js/ace/ace.js";
 import "./js/ace/ext-language_tools.js";
 import "./js/echarts.min.js";
 
-// import jsonData from "./data.json";
-// import { useDataStore } from "@/store/data";
+import jsonData from "./data.json";
+import { useDataStore } from "@/store/data";
 
 const Component = {
     setup() {
