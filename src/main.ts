@@ -32,6 +32,6 @@ app.component("echartsMap", Map);
 const pinia = createPinia();
 app.use(pinia).use(router).use(ElementPlus, { locale: zhCn }).mount(document.querySelector("#app"));
 
-setTimeout(() => {
-    useDataStore().setData(jsonData.data.data);
-});
+// setTimeout(() => {
+//     useDataStore().setData(jsonData.data.data);
+// });

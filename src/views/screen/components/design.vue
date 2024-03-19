@@ -4,11 +4,7 @@
         <a-ruler :scale="state.scale" :scroll="state.scroll" :show-ruler="state.ruler" direction="v" size="1080px" />
         <div :class="{ preview: preview }" :style="canvasStyle" class="design-canvas" @contextmenu="contextmenu" @mousedown.left="onmousedown">
             <draggable
-                v-bind="{
-                    group: 'form',
-                    animation: 200,
-                    handle: '.none'
-                }"
+                v-bind="{ group: 'form', animation: 200, handle: '.none' }"
                 :list="data.list"
                 class="drag"
                 itemKey="id"
@@ -365,6 +361,7 @@
         }
         props.updatePosition(index, obj, tempRectIndex);
     };
+
     const setCurrentConfig = (obj: ScreenData | {}) => {
         designStore.setScreenControlAttr(obj);
     };

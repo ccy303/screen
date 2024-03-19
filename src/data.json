@@ -10,38 +10,37 @@
                     "type": "bar",
                     "optionnumber": "optionnumber",
                     "isinitial": "isinitial",
-                    "config": {
-                        "versiondescribe": "1",
-                        "ispublish": 1,
-                        "pluginName": "plugin1",
-                        "optionsType": 1,
-                        "version": "v1"
+                    "config": { "versiondescribe": "1", "ispublish": 1, "pluginName": "plugin1", "optionsType": 1, "version": "v1" },
+                    "dataset": {
+                        "dataindex": { "acctusage": 0, "acctcount": 1, "qingsort": 2 },
+                        "rows": [
+                            ["账户用途", "分布数量", "排序列"],
+                            ["活期1", 74, 40],
+                            ["结算类", 40, 45],
+                            ["测试类1", 99, 80],
+                            ["余额模型测试", 49, 50],
+                            ["测试类2", 44, 40],
+                            ["测试类3", 44, 53],
+                            ["其他", 78, 67]
+                        ]
                     },
                     "option": {
                         "dataset": {
                             "source": [
-                                ["Mon", 120],
-                                ["Tue", 200],
-                                ["Wed", 300],
-                                ["Thu", 400],
-                                ["Fri", 500],
-                                ["Sat", 600],
-                                ["Sun", 700]
+                                ["账户用途", "分布数量", "排序列"],
+                                ["活期1", 74, 40],
+                                ["结算类", 40, 45],
+                                ["测试类1", 99, 80],
+                                ["余额模型测试", 49, 50],
+                                ["测试类2", 44, 40],
+                                ["测试类3", 44, 53],
+                                ["其他", 78, 67]
                             ]
                         },
-                        "yAxis": {
-                            "type": "value"
-                        },
-                        "xAxis": {
-                            "type": "category"
-                        },
-                        "grid": {
-                            "top": 0,
-                            "left": 0,
-                            "bottom": 30,
-                            "right": 0
-                        },
-                        "series": [{ "type": "bar" }]
+                        "yAxis": { "type": "value" },
+                        "xAxis": { "type": "category" },
+                        "grid": { "top": 0, "left": 0, "bottom": 30, "right": 0 },
+                        "series": [{ "type": "bar" }, { "type": "bar" }]
                     },
                     "optionversion": [
                         { "id": "1900953719731115008", "version": "v1", "versiondescribe": "1", "isinitial": 1 },
@@ -51,44 +50,38 @@
                 },
                 {
                     "pluginname": "plugiin0",
-                    "position": {
-                        "top": 23,
-                        "left": 1355,
-                        "width": 300,
-                        "height": 300
-                    },
+                    "position": { "top": 23, "left": 1355, "width": 300, "height": 300 },
                     "id": "1900953719738993664",
                     "type": "pie",
-                    "config": {
-                        "versiondescribe": "1",
-                        "ispublish": 1,
-                        "pluginName": "plugiin0",
-                        "optionsType": 1,
-                        "version": "v2"
+                    "config": { "versiondescribe": "1", "ispublish": 1, "pluginName": "plugiin0", "optionsType": 1, "version": "v2" },
+                    "dataset": {
+                        "dataindex": { "acctusage": 0, "acctcount": 1, "qingsort": 2 },
+                        "rows": [
+                            ["账户用途", "分布数量", "排序列"],
+                            ["活期1", 74, 40],
+                            ["结算类", 40, 45],
+                            ["测试类1", 99, 80],
+                            ["余额模型测试", 49, 50],
+                            ["测试类2", 44, 40],
+                            ["测试类3", 44, 53],
+                            ["其他", 78, 67]
+                        ]
                     },
                     "option": {
                         "dataset": {
                             "source": [
-                                ["Search Engine", 1048],
-                                ["Direct", 35],
-                                ["Email", 80],
-                                ["Union Ads", 484],
-                                ["Video Ads", 300],
-                                ["Test", 1300]
+                                ["账户用途", "分布数量", "排序列"],
+                                ["活期1", 74, 40],
+                                ["结算类", 40, 45],
+                                ["测试类1", 99, 80],
+                                ["余额模型测试", 49, 50],
+                                ["测试类2", 44, 40],
+                                ["测试类3", 44, 53],
+                                ["其他", 78, 67]
                             ]
                         },
-                        "grid": {
-                            "top": 0,
-                            "left": 0,
-                            "bottom": 0,
-                            "right": 0
-                        },
-                        "series": [
-                            {
-                                "type": "pie",
-                                "radius": "50%"
-                            }
-                        ]
+                        "grid": { "top": 0, "left": 0, "bottom": 0, "right": 0 },
+                        "series": [{ "type": "pie" }]
                     },
                     "optionnumber": "optionnumber",
                     "isinitial": "isinitial",
@@ -97,6 +90,42 @@
                         { "id": "1900953719738993664", "version": "v2", "versiondescribe": "2" },
                         { "id": "1900953719738993664", "version": "v3", "versiondescribe": "3" }
                     ]
+                },
+                {
+                    "type": "line",
+                    "position": { "width": 400, "height": 300, "left": 1311, "top": -581 },
+                    "dataset": {
+                        "dataindex": { "acctusage": 0, "acctcount": 1, "qingsort": 2 },
+                        "rows": [
+                            ["账户用途", "分布数量", "排序列"],
+                            ["活期1", 74, 40],
+                            ["结算类", 40, 45],
+                            ["测试类1", 99, 80],
+                            ["余额模型测试", 49, 50],
+                            ["测试类2", 44, 40],
+                            ["测试类3", 44, 53],
+                            ["其他", 78, 67]
+                        ]
+                    },
+                    "option": {
+                        "dataset": {
+                            "source": [
+                                ["账户用途", "分布数量", "排序列"],
+                                ["活期1", 74, 40],
+                                ["结算类", 40, 45],
+                                ["测试类1", 99, 80],
+                                ["余额模型测试", 49, 50],
+                                ["测试类2", 44, 40],
+                                ["测试类3", 44, 53],
+                                ["其他", 78, 67]
+                            ]
+                        },
+                        "xAxis": { "type": "category" },
+                        "yAxis": { "type": "value" },
+                        "grid": { "left": 0, "top": 0, "right": 0, "bottom": 30 },
+                        "series": [{ "type": "line" }]
+                    },
+                    "config": {}
                 },
                 {
                     "type": "text",

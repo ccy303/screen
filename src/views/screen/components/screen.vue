@@ -1,10 +1,7 @@
 <!-- Created by weiXin:337547038 -->
 <template>
     <div
-        :class="{
-            ['group-' + data.type]: true,
-            [data.config?.class]: data.config?.class
-        }"
+        :class="{ ['group-' + data.type]: true, [data.config?.class]: data.config?.class }"
         :style="positionStyle"
         class="group relative"
         @mousedown="stopPropagation"
