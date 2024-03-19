@@ -4,7 +4,6 @@
     <div class="main-right" :class="{ lock: isLockDisplay }">
         <el-tabs class="tabs" model-value="position">
             <el-tab-pane label="属性配置" name="position">
-                {{ current }}
                 <el-form size="small">
                     <el-form-item label="版本筛选" v-if="current.optionversion">
                         <el-select v-model="currentOptionVersion" @change="optionVersionChange">
@@ -248,20 +247,12 @@
     });
 
     watch(
-        () => test.screenControlAttr,
-        () => {
-            console.log(1234, test);
-        },
-        { deep: true }
-    );
-
-    watch(
         () => current.value,
         n => {
-            console.log(1234, n.dataset.rows[0]);
-            transferList.value = n.dataset.rows[0].splice(1).map((item: any, idx: any) => ({ label: item, key: idx + 1 }));
-            console.log(1234, transferList.value);
             currentOptionVersion.value = n.config?.version;
+            transferList.value = n.dataset?.rows?.[0]?.splice(1)?.map((item: any, idx: any) => ({ label: item, key: idx + 1 }));
+            // console.log(1234, transferList?.value);
+            // console.log(1234, n?.dataset?.rows?.[0]);
         },
         {
             deep: true
