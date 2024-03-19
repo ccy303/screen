@@ -251,7 +251,7 @@
         n => {
             currentOptionVersion.value = n.config?.version;
             transferList.value = n.dataset?.rows?.[0]?.splice(1)?.map((item: any, idx: any) => ({ label: item, key: idx + 1 }));
-            console.log(1234, transferList?.value);
+            console.log(1234444, transferList?.value);
             console.log(1234, n?.dataset?.rows?.[0]);
         },
         {
