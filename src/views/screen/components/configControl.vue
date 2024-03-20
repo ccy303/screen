@@ -151,10 +151,10 @@
                             <el-radio :label="1">是</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="版本表述">
+                    <el-form-item label="主题编码">
                         <el-input placeholder="主题编码" :model-value="config.themecode" @input="configChange('themecode', $event)" />
                     </el-form-item>
-                    <el-form-item label="版本表述">
+                    <el-form-item label="主题名称">
                         <el-input placeholder="主题名称" :model-value="config.themename" @input="configChange('themename', $event)" />
                     </el-form-item>
                     <el-form-item label="大屏宽度">
@@ -250,9 +250,7 @@
         () => current.value,
         n => {
             currentOptionVersion.value = n.config?.version;
-            transferList.value = n.dataset?.rows?.[0]?.splice(1)?.map((item: any, idx: any) => ({ label: item, key: idx + 1 }));
-            console.log(1234444, transferList?.value);
-            console.log(1234, n?.dataset?.rows?.[0]);
+            transferList.value = n.dataset?.rows?.[0]?.slice(1)?.map((item: any, idx: any) => ({ label: item, key: idx + 1 }));
         },
         {
             deep: true
@@ -794,10 +792,63 @@
         return data;
     };
 
-    const transferChnge = e => {
-        transferData.value = e;
-        let currentObject = current.value.dataset.source;
-        console.log(currentObject);
+    const transferChnge = (data: any) => {
+        transferData.value = data;
+        if (!current.value.dataset || !current.value.dataset.rows) {
+            return;
+        }
+
+        if (!data.length) {
+            current.value.option.dataset.source = [];
+            return;
+        }
+
+        const { rows } = current.value.dataset;
+
+        const source: any[] = [];
+
+        // 遍历原数据
+        for (let i = 0; i < rows.length; i++) {
+            const item: any[] = rows[i];
+            if (!source[i]) {
+                source[i] = [];
+            }
+            for (let j: number = 0; j < item.length; j++) {
+                // 插入X轴
+                if (j == 0) {
+                    source[i].push(item[j]);
+                    continue;
+                }
+                // 已选项
+                if (data.includes(j)) {
+                    source[i].push(item[j]);
+                }
+            }
+        }
+
+        if (current.value.type == "pie") {
+            const data: any[] = [];
+            for (let i = 1; i < source.length; i++) {
+                const item: any[] = source[i];
+                if (!data[i - 1]) {
+                    data[i - 1] = [];
+                }
+                let total = 0;
+                for (let j = 0; j < item.length; j++) {
+                    if (j == 0) {
+                        data[i - 1].push(item[j]);
+                    } else {
+                        total += item[j];
+                    }
+                }
+                data[i - 1].push(total);
+            }
+            current.value.option.dataset.source = data;
+            current.value.option.series = [{ type: "pie" }];
+        } else {
+            current.value.option.dataset.source = source;
+            current.value.option.series = data.map(() => ({ type: current.value.type }));
+        }
     };
 
     onBeforeRouteLeave(() => {
