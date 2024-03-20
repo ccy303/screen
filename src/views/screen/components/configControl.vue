@@ -204,12 +204,13 @@
         </el-tabs>
         <upload-image ref="uploadImageEl" @click="selectImg" />
     </div>
-    <el-dialog v-model="dialogShow" title="数据配置">
-        <el-transfer :titles="['数据源', '已配置数据']" v-model="transferData" :data="transferList" @change="transferChnge" />
+    <el-dialog v-model="dialogShow" title="数据配置" draggable width="600px" :modal="false">
+        <el-transfer :titles="['数据源', '已配置数据']" v-model="transferData" :data="transferList" @change="transferChnge"> </el-transfer>
     </el-dialog>
 </template>
 
 <script setup lang="ts">
+    import Draggable from "vuedraggable-es";
     import { reactive, ref, computed, watch, inject } from "vue";
     import { onBeforeRouteLeave } from "vue-router";
     import type { Config, OpenDrawer } from "../types";
