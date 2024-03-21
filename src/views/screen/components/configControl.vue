@@ -204,13 +204,13 @@
         </el-tabs>
         <upload-image ref="uploadImageEl" @click="selectImg" />
     </div>
-    <el-dialog v-model="dialogShow" title="数据配置" draggable width="600px" :modal="false">
-        <el-transfer :titles="['数据源', '已配置数据']" v-model="transferData" :data="transferList" @change="transferChnge"> </el-transfer>
+    <el-dialog v-model="dialogShow" title="数据配置" draggable width="400px" :modal="false" overflow>
+        <dataDrag :key="current.id" :data="transferList" @change="transferChange" />
     </el-dialog>
 </template>
 
 <script setup lang="ts">
-    import Draggable from "vuedraggable-es";
+    import dataDrag from "./dataDrag.vue";
     import { reactive, ref, computed, watch, inject } from "vue";
     import { onBeforeRouteLeave } from "vue-router";
     import type { Config, OpenDrawer } from "../types";
@@ -233,7 +233,11 @@
     const dialogShow: any = ref(false);
 
     const transferData: any = ref([]);
-    const transferList: any = ref([]);
+    const transferList: any = ref({
+        data: [],
+        axis: [],
+        userDataSetSelect: {}
+    });
 
     const emits: any = defineEmits<{
         (e: "update:config", val: Config): void;
@@ -250,12 +254,23 @@
     watch(
         () => current.value,
         n => {
+            transferList.value = { data: [], axis: [] };
             currentOptionVersion.value = n.config?.version;
-            transferList.value = n.dataset?.rows?.[0]?.slice(1)?.map((item: any, idx: any) => ({ label: item, key: idx + 1 }));
+            // 格式化拖拽源
+            [...(n.dataset?.dataindex || [])]
+                .sort((a, b) => {
+                    return a[2] - b[2];
+                })
+                .map((v: any) => {
+                    if (v[2] == 2) {
+                        transferList.value.data.push({ name: `${v[1]}(数字)`, originalNmae: v[1] });
+                    } else {
+                        transferList.value.axis.push({ name: `${v[1]}(文字)`, originalNmae: v[1] });
+                    }
+                });
+            transferList.value.userDataSetSelect = n.userDataSetSelect;
         },
-        {
-            deep: true
-        }
+        { deep: true }
     );
 
     watch(
@@ -263,9 +278,7 @@
         n => {
             currentConfigVersion.value = n.version;
         },
-        {
-            immediate: true
-        }
+        { immediate: true }
     );
 
     const isLockDisplay = computed(() => {
@@ -793,37 +806,45 @@
         return data;
     };
 
-    const transferChnge = (data: any) => {
-        transferData.value = data;
+    const transferChange = (data: any) => {
+        const _data: any = {};
+        for (let key in data) {
+            _data[key] = data[key].map((v: any) => v.originalNmae);
+        }
+
+        const { xAxis, yAxis, legend } = _data;
         if (!current.value.dataset || !current.value.dataset.rows) {
             return;
         }
 
-        if (!data.length) {
+        if (!xAxis.length || !yAxis.length) {
             current.value.option.dataset.source = [];
             return;
         }
 
-        const { rows } = current.value.dataset;
-
+        const { rows, dataindex } = current.value.dataset;
         const source: any[] = [];
 
-        // 遍历原数据
+        // 横轴在dataindex/rows中的列坐标
+        const [x] = xAxis.slice(-1);
+        const xAxisIndex = dataindex.findIndex((v: any) => v.includes(x));
+
+        // 处理第一列
         for (let i = 0; i < rows.length; i++) {
-            const item: any[] = rows[i];
+            const item = rows[i];
             if (!source[i]) {
                 source[i] = [];
             }
-            for (let j: number = 0; j < item.length; j++) {
-                // 插入X轴
-                if (j == 0) {
-                    source[i].push(item[j]);
-                    continue;
-                }
-                // 已选项
-                if (data.includes(j)) {
-                    source[i].push(item[j]);
-                }
+            source[i].push(item[xAxisIndex]);
+        }
+
+        for (let i = 0; i < yAxis.length; i++) {
+            const item = yAxis[i];
+            const y = dataindex.findIndex((v: any) => v.includes(item));
+
+            for (let j = 0; j < rows.length; j++) {
+                const col = rows[j];
+                source[j].push(col[y]);
             }
         }
 
@@ -848,8 +869,10 @@
             current.value.option.series = [{ type: "pie" }];
         } else {
             current.value.option.dataset.source = source;
-            current.value.option.series = data.map(() => ({ type: current.value.type }));
+            current.value.option.series = yAxis.map(() => ({ type: current.value.type }));
         }
+
+        current.value.userDataSetSelect = data;
     };
 
     onBeforeRouteLeave(() => {

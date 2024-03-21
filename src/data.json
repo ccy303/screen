@@ -11,17 +11,30 @@
                     "optionnumber": "optionnumber",
                     "isinitial": "isinitial",
                     "config": { "versiondescribe": "1", "ispublish": 1, "pluginName": "plugin1", "optionsType": 1, "version": "v1" },
+                    "userDataSetSelect": {
+                        "xAxis": [{ "name": "测试横轴(文字)", "originalNmae": "测试横轴" }],
+                        "yAxis": [
+                            { "name": "分布数量(数字)", "originalNmae": "分布数量" },
+                            { "name": "排序列(数字)", "originalNmae": "排序列" }
+                        ],
+                        "legend": []
+                    },
                     "dataset": {
-                        "dataindex": { "acctusage": 0, "acctcount": 1, "qingsort": 2 },
+                        "dataindex": [
+                            ["acctusage", "账户用途", 1, false],
+                            ["acctcount", "分布数量", 2, false],
+                            ["qingsort", "排序列", 2, false],
+                            ["test", "测试横轴", 1, false]
+                        ],
                         "rows": [
-                            ["账户用途", "分布数量", "排序列"],
-                            ["活期1", 74, 40],
-                            ["结算类", 40, 45],
-                            ["测试类1", 99, 80],
-                            ["余额模型测试", 49, 50],
-                            ["测试类2", 44, 40],
-                            ["测试类3", 44, 53],
-                            ["其他", 78, 67]
+                            ["账户用途", "分布数量", "排序列", "测试横轴"],
+                            ["活期1", 74, 40, "测试横轴1"],
+                            ["结算类", 40, 45, "测试横轴2"],
+                            ["测试类1", 99, 80, "测试横轴3"],
+                            ["余额模型测试", 49, 50, "测试横轴4"],
+                            ["测试类2", 44, 40, "测试横轴5"],
+                            ["测试类3", 44, 53, "测试横轴6"],
+                            ["其他", 78, 67, "测试横轴7"]
                         ]
                     },
                     "option": {
@@ -54,17 +67,30 @@
                     "id": "1900953719738993664",
                     "type": "pie",
                     "config": { "versiondescribe": "1", "ispublish": 1, "pluginName": "plugiin0", "optionsType": 1, "version": "v2" },
+                    "userDataSetSelect": {
+                        "xAxis": [{ "name": "测试横轴(文字)", "originalNmae": "测试横轴" }],
+                        "yAxis": [
+                            { "name": "分布数量(数字)", "originalNmae": "分布数量" },
+                            { "name": "排序列(数字)", "originalNmae": "排序列" }
+                        ],
+                        "legend": []
+                    },
                     "dataset": {
-                        "dataindex": { "acctusage": 0, "acctcount": 1, "qingsort": 2 },
+                        "dataindex": [
+                            ["acctusage", "账户用途", 1, false],
+                            ["acctcount", "分布数量", 2, false],
+                            ["qingsort", "排序列", 2, false],
+                            ["test", "测试横轴", 1, false]
+                        ],
                         "rows": [
-                            ["账户用途", "分布数量", "排序列"],
-                            ["活期1", 74, 40],
-                            ["结算类", 40, 99],
-                            ["测试类1", 45, 80],
-                            ["余额模型测试", 49, 78],
-                            ["测试类2", 44, 53],
-                            ["测试类3", 44, 40],
-                            ["其他", 50, 67]
+                            ["账户用途", "分布数量", "排序列", "测试横轴"],
+                            ["活期1", 74, 40, "测试横轴1"],
+                            ["结算类", 40, 45, "测试横轴2"],
+                            ["测试类1", 99, 80, "测试横轴3"],
+                            ["余额模型测试", 49, 50, "测试横轴4"],
+                            ["测试类2", 44, 40, "测试横轴5"],
+                            ["测试类3", 44, 53, "测试横轴6"],
+                            ["其他", 78, 67, "测试横轴7"]
                         ]
                     },
                     "option": {
@@ -94,17 +120,30 @@
                 {
                     "type": "line",
                     "position": { "width": 400, "height": 300, "left": 1311, "top": -581 },
+                    "userDataSetSelect": {
+                        "xAxis": [{ "name": "测试横轴(文字)", "originalNmae": "测试横轴" }],
+                        "yAxis": [
+                            { "name": "分布数量(数字)", "originalNmae": "分布数量" },
+                            { "name": "排序列(数字)", "originalNmae": "排序列" }
+                        ],
+                        "legend": []
+                    },
                     "dataset": {
-                        "dataindex": { "acctusage": 0, "acctcount": 1, "qingsort": 2 },
+                        "dataindex": [
+                            ["acctusage", "账户用途", 1, false],
+                            ["acctcount", "分布数量", 2, false],
+                            ["qingsort", "排序列", 2, false],
+                            ["test", "测试横轴", 1, false]
+                        ],
                         "rows": [
-                            ["账户用途", "分布数量", "排序列"],
-                            ["活期1", 74, 40],
-                            ["结算类", 40, 45],
-                            ["测试类1", 99, 53],
-                            ["余额模型测试", 49, 50],
-                            ["测试类2", 44, 40],
-                            ["测试类3", 44, 80],
-                            ["其他", 78, 67]
+                            ["账户用途", "分布数量", "排序列", "测试横轴"],
+                            ["活期1", 74, 40, "测试横轴1"],
+                            ["结算类", 40, 45, "测试横轴2"],
+                            ["测试类1", 99, 80, "测试横轴3"],
+                            ["余额模型测试", 49, 50, "测试横轴4"],
+                            ["测试类2", 44, 40, "测试横轴5"],
+                            ["测试类3", 44, 53, "测试横轴6"],
+                            ["其他", 78, 67, "测试横轴7"]
                         ]
                     },
                     "option": {
