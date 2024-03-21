@@ -346,6 +346,7 @@
         const { left, top, width, height } = currentData.position;
         switch (key) {
             case "copy":
+                console.log(123456, currentData);
                 const newObj = jsonParseStringify(currentData);
                 if (isGroupId) {
                     const randId = randomString(8);
@@ -361,6 +362,14 @@
                         }
                     });
                 }
+                newObj.pluginname = "";
+                newObj.id = "";
+                newObj.config.pluginName = "";
+                newObj.position = {
+                    ...newObj.position,
+                    left: newObj.position.left + 50,
+                    top: newObj.position.top + 50
+                };
                 screenData.value.list.push(newObj);
                 break;
             case "del":

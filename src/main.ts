@@ -18,6 +18,7 @@ import "./js/ace/ext-language_tools.js";
 import "./js/echarts.min.js";
 
 import jsonData from "./data.json";
+import testData from "./test.json";
 import { useDataStore } from "@/store/data";
 
 const Component = {
@@ -33,5 +34,5 @@ const pinia = createPinia();
 app.use(pinia).use(router).use(ElementPlus, { locale: zhCn }).mount(document.querySelector("#app"));
 
 setTimeout(() => {
-    useDataStore().setData(jsonData.data.data);
+    useDataStore().setData(testData);
 });

@@ -169,15 +169,15 @@
                 {
                     "type": "text",
                     "position": {
-                        "width": 315,
-                        "height": 67,
+                        "width": 713,
+                        "height": 432,
                         "left": 489,
                         "top": 364
                     },
                     "config": {
                         "text": "货到付款决定是否可见好的反抗精神的快捷方式的接口和司法会计的发生的发生的",
                         "style": {
-                            "fontSize": "30px"
+                            "fontSize": "60px"
                         }
                     }
                 }

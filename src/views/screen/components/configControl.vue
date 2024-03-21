@@ -360,7 +360,7 @@
     // ---------------------大屏配置结束---------------------
     const positionProperty: any = computed(() => {
         if (Object.keys(current.value).length) {
-            const { config = {}, position, type, option = {} }: { config: any; position: any; type: any; option: any } = current.value;
+            const { config = {}, position, type, option = {} } = current.value;
             return [
                 {
                     type: "group",
@@ -422,7 +422,7 @@
                 },
                 {
                     label: "标题",
-                    value: option.title?.text,
+                    value: option?.title?.text,
                     placeholder: "请输入标题",
                     key: "title.text",
                     path: "option",
@@ -430,7 +430,7 @@
                 },
                 {
                     label: "标题字号",
-                    value: option.title?.textStyle?.fontSize,
+                    value: option?.title?.textStyle?.fontSize,
                     placeholder: "标题字号",
                     key: "title.textStyle.fontSize",
                     path: "option",
@@ -438,7 +438,7 @@
                 },
                 {
                     label: "字体颜色",
-                    value: option.title?.textStyle?.color,
+                    value: option?.title?.textStyle?.color,
                     placeholder: "标题字号",
                     key: "title.textStyle.color",
                     path: "option",
@@ -447,7 +447,7 @@
                 },
                 {
                     label: "二级标题",
-                    value: option.title?.subtext,
+                    value: option?.title?.subtext,
                     placeholder: "标题字号",
                     key: "title.subtext",
                     path: "option",

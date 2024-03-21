@@ -24,7 +24,7 @@
             <div class="list-group axis">
                 <div class="title">横轴</div>
                 <div class="drag">
-                    <template v-if="!valueData.xAxis.length">
+                    <template v-if="!valueData?.xAxis?.length">
                         <span class="placeholder">尝试将文字字段拖到这里</span>
                     </template>
                     <draggable id="xAxis" style="flex: 1" :list="valueData.xAxis" :group="{ name: 'xAxis' }" item-key="name">
@@ -41,7 +41,7 @@
             <div class="list-group axis">
                 <div class="title">纵轴</div>
                 <div class="drag">
-                    <template v-if="!valueData.yAxis.length">
+                    <template v-if="!valueData?.yAxis?.length">
                         <span class="placeholder">尝试将数字字段拖到这里</span>
                     </template>
                     <draggable id="yAxis" style="flex: 1" :list="valueData.yAxis" group="yAxis" item-key="name">
@@ -57,7 +57,7 @@
             <div class="list-group axis">
                 <div class="title">系列</div>
                 <div class="drag">
-                    <template v-if="!valueData.legend.length">
+                    <template v-if="!valueData?.legend?.length">
                         <span class="placeholder">尝试将文字字段拖到这里</span>
                     </template>
                     <draggable id="legend" style="flex: 1" :list="valueData.legend" group="xAxis" item-key="name">
@@ -92,7 +92,7 @@
     watch(
         () => props.data.userDataSetSelect,
         n => {
-            const { xAxis, yAxis, legend } = n;
+            const { xAxis, yAxis, legend } = n || {};
             valueData.value.xAxis = xAxis;
             valueData.value.yAxis = yAxis;
             valueData.value.legend = legend;
