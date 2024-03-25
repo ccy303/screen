@@ -232,7 +232,6 @@
     const currentConfigVersion = ref();
     const dialogShow: any = ref(false);
 
-    const transferData: any = ref([]);
     const transferList: any = ref({
         data: [],
         axis: [],
@@ -262,10 +261,10 @@
                     return a[2] - b[2];
                 })
                 .map((v: any) => {
-                    if (v[2] == 2) {
-                        transferList.value.data.push({ name: `${v[1]}(数字)`, originalNmae: v[1] });
+                    if (v[2] == 2 || v[2] == 3) {
+                        transferList.value.data.push({ name: `${v[1]}(数值)`, originalNmae: v[1] });
                     } else {
-                        transferList.value.axis.push({ name: `${v[1]}(文字)`, originalNmae: v[1] });
+                        transferList.value.axis.push({ name: `${v[1]}(文本)`, originalNmae: v[1] });
                     }
                 });
             transferList.value.userDataSetSelect = n.userDataSetSelect;
@@ -808,6 +807,7 @@
 
     const transferChange = (data: any) => {
         const _data: any = {};
+        current.value.userDataSetSelect = data;
         for (let key in data) {
             _data[key] = data[key].map((v: any) => v.originalNmae);
         }
@@ -871,8 +871,6 @@
             current.value.option.dataset.source = source;
             current.value.option.series = yAxis.map(() => ({ type: current.value.type }));
         }
-
-        current.value.userDataSetSelect = data;
     };
 
     onBeforeRouteLeave(() => {

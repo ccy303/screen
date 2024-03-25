@@ -92,10 +92,14 @@
     watch(
         () => props.data.userDataSetSelect,
         n => {
+            console.log(7777, n);
             const { xAxis, yAxis, legend } = n || {};
-            valueData.value.xAxis = xAxis;
-            valueData.value.yAxis = yAxis;
-            valueData.value.legend = legend;
+            console.log(1234, xAxis);
+            console.log(1234, yAxis);
+            console.log(1234, legend);
+            // valueData.value.xAxis = xAxis || [];
+            // valueData.value.yAxis = yAxis || [];
+            // valueData.value.legend = legend || [];
         },
         { deep: true, immediate: true }
     );
