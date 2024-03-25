@@ -5,9 +5,19 @@
         {
             "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByUsageDataPlugin",
             "id": "1910281025138168832",
-            "position": { "top": 20, "left": 78, "width": 300, "height": 300 },
+            "position": {
+                "top": 20,
+                "left": 78,
+                "width": 300,
+                "height": 300
+            },
             "type": "pie",
-            "config": { "versiondescribe": "1", "ispublish": 1, "optionsType": 1, "version": "1" },
+            "config": {
+                "versiondescribe": "1",
+                "ispublish": 1,
+                "optionsType": 1,
+                "version": "1"
+            },
             "dataset": {
                 "dataindex": [
                     ["acctusage", "账户用途", 1, false],
@@ -26,17 +36,26 @@
                 ]
             },
             "option": {
-                "grid": { "top": 0, "left": 0, "bottom": 0, "right": 0 },
-                "series": [{ "type": "pie" }],
+                "grid": {
+                    "top": 0,
+                    "left": 0,
+                    "bottom": 0,
+                    "right": 0
+                },
+                "series": [
+                    {
+                        "type": "pie"
+                    }
+                ],
                 "dataset": {
                     "source": [
-                        ["活期1", 7577],
-                        ["结算类", 1013],
-                        ["我是空", 641],
-                        ["余额模型测试", 52],
-                        ["12312", 48],
-                        ["TEST0001", 49],
-                        ["其他", 84]
+                        ["活期1", 0],
+                        ["结算类", 1],
+                        ["我是空", 2],
+                        ["余额模型测试", 3],
+                        ["12312", 4],
+                        ["TEST0001", 5],
+                        ["其他", 6]
                     ]
                 }
             }
@@ -44,9 +63,24 @@
         {
             "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
             "id": "1910308726930642944",
-            "position": { "top": 16, "left": 507, "width": 400, "height": 300 },
+            "position": {
+                "top": 16,
+                "left": 507,
+                "width": 400,
+                "height": 300
+            },
             "type": "bar",
-            "config": { "versiondescribe": "1", "ispublish": 1, "optionsType": 1, "version": "1" },
+            "config": {
+                "versiondescribe": "1",
+                "ispublish": 1,
+                "optionsType": 1,
+                "version": "1"
+            },
+            "userDataSetSelect": {
+                "xAxis": [{ "name": "是否境内(文本)", "originalNmae": "是否境内" }],
+                "yAxis": [{ "name": "账户数量(数值)", "originalNmae": "账户数量" }],
+                "legend": []
+            },
             "dataset": {
                 "dataindex": [
                     ["bankname", "银行类别", 1, false],
@@ -79,10 +113,23 @@
                 ]
             },
             "option": {
-                "yAxis": { "type": "value" },
-                "xAxis": { "type": "category" },
-                "grid": { "top": 0, "left": 0, "bottom": 30, "right": 0 },
-                "series": [{ "type": "bar" }],
+                "yAxis": {
+                    "type": "value"
+                },
+                "xAxis": {
+                    "type": "category"
+                },
+                "grid": {
+                    "top": 0,
+                    "left": 0,
+                    "bottom": 30,
+                    "right": 0
+                },
+                "series": [
+                    {
+                        "type": "bar"
+                    }
+                ],
                 "dataset": {
                     "source": [
                         ["银行类别", "账户数量"],
@@ -113,7 +160,12 @@
         {
             "pluginname": "",
             "id": "1911025983020868608",
-            "position": { "top": 403, "left": 28, "width": 631, "height": 105 },
+            "position": {
+                "top": 403,
+                "left": 28,
+                "width": 631,
+                "height": 105
+            },
             "type": "border",
             "config": {
                 "style": {
@@ -127,7 +179,12 @@
         {
             "pluginname": "",
             "id": "1911025983020867584",
-            "position": { "top": 409, "left": 35, "width": 91, "height": 94 },
+            "position": {
+                "top": 409,
+                "left": 35,
+                "width": 91,
+                "height": 94
+            },
             "type": "border",
             "config": {
                 "style": {
@@ -141,7 +198,12 @@
         {
             "pluginname": "",
             "id": "1911025983020868609",
-            "position": { "top": 422, "left": 42, "width": 78, "height": 69 },
+            "position": {
+                "top": 422,
+                "left": 42,
+                "width": 78,
+                "height": 69
+            },
             "type": "text",
             "config": {
                 "style": {
