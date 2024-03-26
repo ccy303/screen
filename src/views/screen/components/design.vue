@@ -136,6 +136,7 @@
         }
         return true;
     };
+
     const draggableAdd = (evt: any) => {
         const newIndex = evt.newIndex;
         const obj: any = props.data.list[newIndex];
@@ -180,6 +181,7 @@
             state.activeIndex = dataList.length - 1;
         }
     };
+
     // 设置选区及合并组宽高及坐标点
     const getRectPosition = () => {
         const autoRect = { left: 0, top: 0, ex: 0, ey: 0 };
@@ -210,6 +212,7 @@
             }
         }
     };
+
     /***
      * 查找当前矩形中所有组件并选中
      */
@@ -259,6 +262,7 @@
             return isOverlapX && isOverlapY;
         }
     };
+
     /**
      * 设计区域鼠标事件，框选矩形、搭配键盘键拖动移动滚动条功能
      * @param evt
@@ -324,6 +328,7 @@
             document.onmousemove = null;
         };
     };
+
     const canvasClick = () => {
         state.tempRectIndex = [];
         state.activeIndex = -1;
@@ -332,6 +337,7 @@
         const index = getRandom(0, 1);
         controlTip.value = tips[index];
     };
+
     /**
      * 禁用设计区域右键默认菜单
      * @param evt
@@ -339,6 +345,7 @@
     const contextmenu = (evt: MouseEvent) => {
         evt.preventDefault();
     };
+
     const itemClick = (data: ScreenData, index: number) => {
         if (state.ctrlPress) {
             state.tempRectIndex.push(index);
@@ -357,6 +364,7 @@
             controlTip.value = "可使用键盘方向键调整位置";
         }
     };
+
     const changeEvent = (index: number, obj: UpdatePosition, tempRectIndex: number[]) => {
         if (obj.type === "moveTip") {
             controlTip.value = `当前位置：${obj.left}:${obj.top}`;
@@ -374,6 +382,7 @@
             style: {}
         }
     });
+    
     /**
      * 左右两边展开收起
      * @param type
@@ -398,9 +407,11 @@
         }
         designStore.setDataScreen("scale", state.scale);
     };
+
     const sliderChange = (val: number) => {
         designStore.setDataScreen("scale", val);
     };
+
     //*****************底部工具栏相关****************//
     /**
      * 键盘按下事件 支持键盘控制调整位置
@@ -431,6 +442,7 @@
             event.preventDefault();
         }
     });
+    
     /**
      * 键盘弹起事件
      */
@@ -462,6 +474,7 @@
         });
         props.screenContextmenu(params as Contextmenu2);
     };
+    
     //初始
     const getInit = () => {
         nextTick(() => {

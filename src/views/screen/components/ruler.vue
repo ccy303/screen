@@ -45,6 +45,7 @@ const getScaleText = (text: number) => {
   return parseInt(`${(text / props.scale) * 100}`)
 }
 </script>
+
 <style lang="scss">
 .screen-ruler {
   overflow: hidden;

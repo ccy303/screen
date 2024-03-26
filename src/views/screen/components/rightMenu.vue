@@ -19,6 +19,7 @@
 
     const openData = ref({});
     const visible = ref(false);
+    
     const list = computed(() => {
         //tempRect临时选区组合; group 当前组拆分; single 当前单个组件
         let type = openData.value.type; // 目前只分三种情况
@@ -47,28 +48,34 @@
             return include[type].includes(item.key);
         });
     });
+
     const style = computed(() => {
         return {
             left: `${openData.value.x + 10}px`,
             top: `${openData.value.y + 10}px`
         };
     });
+
     const mouseleave = () => {
         // 隐藏菜单
         setTimeout(() => {
             close();
         }, 1000);
     };
+
     const menuClick = (key: string) => {
         emits("click", key, openData.value);
         close();
     };
+
     const close = () => {
         visible.value = false;
     };
+
     const open = (data: Contextmenu2) => {
         openData.value = data;
         visible.value = true;
     };
+
     defineExpose({ open, close });
 </script>
